@@ -1,0 +1,30 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.5.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.actico'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// https://mvnrepository.com/artifact/xerces/xercesImpl
+	compile group: 'xerces', name: 'xercesImpl', version: '2.9.1'
+    // https://mvnrepository.com/artifact/in.jlibs/jlibs-xml
+	compile group: 'in.jlibs', name: 'jlibs-xml', version: '2.2.1'
+	// https://mvnrepository.com/artifact/in.jlibs/jlibs-xsd
+	compile group: 'in.jlibs', name: 'jlibs-xsd', version: '2.1'
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
