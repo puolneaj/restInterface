@@ -15,6 +15,11 @@ public class Request {
         return obj_id;
     }
 
+    //TODO possible decision for attribute name mapping
+    public String getObj_idAttributeName() {
+        return "ns1:name";
+    }
+
     public void setObj_id(String obj_id) {
         this.obj_id = obj_id;
     }

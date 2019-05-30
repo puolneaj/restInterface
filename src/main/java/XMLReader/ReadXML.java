@@ -31,7 +31,6 @@ public class ReadXML {
         try {
             //url is fixed and stated
             ExecutionServer execution = new ExecutionServer();
-            //execution.setUrl("http://localhost:8087/executionserver/rest/1/ruleServices/BPRequest/versions/0.0.1-SNAPSHOT/rules/BPRequest/MainRequest/executions");
             execution.setUsername("DEFAULT\\Admin");
             execution.setPassword("Admin");
             execution.setUserpassword();
