@@ -18,14 +18,14 @@ import jlibs.xml.xsd.XSParser;
 
 public class XsdToXml2 {
     public static void main(String args[]) throws TransformerConfigurationException {
-        String filename = "C:\\Users\\Jnicolas\\Desktop\\shiporder.xsd";
+        String filename = "MainRequest.xsd";
 
         final Document doc = loadXsdDocument(filename);
 
 // Find the docs root element and use it to find the targetNamespace
         final Element rootElem = doc.getDocumentElement();
         String targetNamespace = null;
-        if (rootElem != null && rootElem.getNodeName().equals("xs:schema")) {
+        if (rootElem != null && rootElem.getNodeName().equals("schema")) {
             targetNamespace = rootElem.getAttribute("targetNamespace");
         }
 
@@ -45,7 +45,7 @@ public class XsdToXml2 {
 
 // Build the sample xml doc
 // Replace first param to XMLDoc with a file input stream to write to file
-        QName rootElement = new QName(targetNamespace, "shiporder.xsd");
+        QName rootElement = new QName(targetNamespace, "output");
         XMLDocument sampleXml = new XMLDocument(new StreamResult(System.out), true, 4, null);
         instance.generate(xsModel, rootElement, sampleXml);
     }
