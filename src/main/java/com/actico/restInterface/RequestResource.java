@@ -66,9 +66,27 @@ public class RequestResource {
     }
 
     @GetMapping(path = "/requestsACTICO")
-    public List<Output> retrieveAllACTICORequests() {
+    public List<Output> retrieveAllACTICOResponses() {
         return service.findAllActico();
     }
 
+    //retrieveRequest
+    @GetMapping(path = "/requestsACTICO/{id}")
+    public Output retrieveResponse(@PathVariable String id) {
+        Output output = service.findOneResponse(id);
+        if (output == null) {
+            throw new RequestNotFoundException("id-" + id);
+        }
+        return output;
+    }
+
+    @DeleteMapping(path = "/requestsACTICO/{id}")
+    public @ResponseBody
+    void removeResponse(@PathVariable String id) {
+        Output output = service.deleteResponseById(id);
+        if (output == null) {
+            throw new RequestNotFoundException("id - " + id);
+        }
+    }
 
 }

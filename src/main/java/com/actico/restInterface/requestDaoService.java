@@ -71,4 +71,26 @@ public class requestDaoService {
         return outputs;
 
     }
+
+    public Output findOneResponse(String id) {
+        for (Output output : outputs) {
+            if (output.getObj_id_key().equals(id)) {
+                return output;
+            }
+        }
+        return null;
+    }
+
+    public Output deleteResponseById(String id) {
+        Iterator<Output> iterator = outputs.iterator();
+        while (iterator.hasNext()) {
+            Output output = iterator.next();
+            if (output.getObj_id_key().equals(id)) {
+                iterator.remove();
+                return output;
+            }
+        }
+        return null;
+    }
+
 }
