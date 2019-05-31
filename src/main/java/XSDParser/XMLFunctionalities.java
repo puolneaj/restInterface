@@ -22,8 +22,16 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.net.HttpURLConnection;
 
+/**
+ * repository of methods related to XML
+ */
 public class XMLFunctionalities {
 
+    /**
+     * read the XML using Bufferedreader
+     * @param con connection Http from which the stream is read
+     * @return response, a string value of what the contains the Http connection
+     */
     public static StringBuffer readXXML(HttpURLConnection con) {
 
         System.out.println("\n------READ THE WHOLE DOCUMENT USING BUFFEREDREADER-------\n");
@@ -48,6 +56,11 @@ public class XMLFunctionalities {
         return response;
     }
 
+    /**
+     * Allow to manipulate a document
+     * @param document
+     * @return a string with the value of the document
+     */
     public static String getXmlDocument(Document document) {
         DOMImplementationLS domImplementationLS = (DOMImplementationLS) document
                 .getImplementation();
@@ -56,6 +69,14 @@ public class XMLFunctionalities {
         return string;
     }
 
+    /**
+     * change a string into a XML document
+     * parse the XML document
+     * set the XML nodes following the object input
+     * @param stringWriter string corresponding to the future XML file
+     * @param input object model used to set the attributes value of XML file
+     * @return
+     */
     public static Document modifyXMLRequest(StringWriter stringWriter, Input input) {
         //parse document with respect to XML nodes
         Document document = null;
@@ -88,6 +109,11 @@ public class XMLFunctionalities {
 
     }
 
+    /**
+     * take out attributes values of XML node
+     * @param stringWriter string corresponding to the XML file
+     * @return output object with the XML attributes values in the object fields
+     */
     public static Output getNodeXMLResponse(StringBuffer stringWriter) {
         //parse document with respect to XML nodes
         Document document = null;
@@ -114,6 +140,12 @@ public class XMLFunctionalities {
 
     }
 
+    /**
+     * send a given XML file on a given connection Http
+     * access the response code
+     * @param con Http Connection
+     * @param XMLRequest XML file with the request
+     */
     public static void sendXML(HttpURLConnection con, String XMLRequest) {
         int responseCode = 0;
         try {
@@ -131,10 +163,17 @@ public class XMLFunctionalities {
             e.printStackTrace();
         }
         //get the response code of the HTTP protocol
-
         System.out.println("Response Code : " + responseCode);
     }
 
+    /**
+     * get an XML Document
+     * turn the XML Document into a string
+     * @param xsModel structure of the XML (XML Schema Definition)
+     * @param targetNamespace --no idea
+     * @return return a string which represents the XML Document
+     * @throws TransformerConfigurationException
+     */
     public static StringWriter getXML(XSModel xsModel, String targetNamespace) throws TransformerConfigurationException {
         // Define defaults for the XML generation
         XSInstance instance = new XSInstance();

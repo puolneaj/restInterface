@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * set the server settings (authentication and body of the request)
+ * select the appropriate rule model
+ */
 public class serverManager {
     public static HttpURLConnection launchServer() {
         //TODO Get all configuration data from .properties file

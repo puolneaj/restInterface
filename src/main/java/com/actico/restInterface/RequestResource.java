@@ -67,7 +67,7 @@ public class RequestResource {
 
     @GetMapping(path = "/requestsACTICO")
     public List<Output> retrieveAllACTICOResponses() {
-        return service.findAllActico();
+        return service.findAllResponses();
     }
 
     //retrieveRequest

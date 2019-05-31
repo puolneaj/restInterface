@@ -12,8 +12,16 @@ import jlibs.xml.xsd.XSParser;
 import java.io.*;
 import java.net.HttpURLConnection;
 
-
+/**
+ * main class which uses the functionalities of XML and XSD
+ */
 public class XsdToXml {
+    /**
+     * trigger Actico Server and get a response from an hardcoded request
+     * print the output generated
+     * @param args
+     * @throws TransformerConfigurationException
+     */
     public static void main(String args[]) throws TransformerConfigurationException {
 
         Request request = new Request();
@@ -30,7 +38,14 @@ public class XsdToXml {
         output=getBackRequest(input);
         System.out.println(output.toString());
     }
-    //TODO turn StringBuffer into Output
+
+    /**
+     * main method which triggers Actico server
+     * @param input the model on which the XML file request is based upon
+     * @return the output model on which the XML file response is based upon
+     * @throws TransformerConfigurationException
+     */
+    //TODO check if there is no better way to chose the parameteres of the method -> remove input
     public static Output getBackRequest(Input input) throws TransformerConfigurationException {
         final String filename = "MainRequest.xsd";
         final Document doc = XSDParser.loadXsdDocument(filename);

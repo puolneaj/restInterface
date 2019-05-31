@@ -21,11 +21,25 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class ReadXML {
+    /**
+     * read an XML file
+     * method is not necessary at the moment
+     * can be useful for later stage of the project
+     * send the request in XML format
+     * read and parse the XML response
+     * insert the XML nodes attributes into output object
+     * @param args
+     */
     public static void main(String[] args) {
         ReadXML localhost = new ReadXML();
         localhost.getResponse();
     }
 
+    /**
+     * connect with Actico Server for a given rule
+     * pass the authentication gate
+     * set a hardcoded request
+     */
     public void getResponse() {
 
         try {

@@ -7,7 +7,15 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
+/**
+ * Gather the functionalities of XSD file
+ */
 public class XSDParser {
+    /**
+     * Build a Document from and XSD
+     * @param inputName location of the XSD file
+     * @return XSD with a document type
+     */
     public static Document loadXsdDocument(String inputName) {
         final String filename = inputName;
 
@@ -29,6 +37,11 @@ public class XSDParser {
         return doc;
     }
 
+    /**
+     * catch the targetname space
+     * @param doc XSD of type document
+     * @return the targetname of type String
+     */
     public static String getTargetnamespace(Document doc){
         // Find the docs root element and use it to find the targetNamespace
         final Element rootElem = doc.getDocumentElement();
