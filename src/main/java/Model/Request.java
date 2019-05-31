@@ -1,6 +1,7 @@
 package Model;
 
 public class Request {
+
     private String obj_id;
 
     private String code;
@@ -16,9 +17,9 @@ public class Request {
     }
 
     //TODO possible decision for attribute name mapping
-    public String getObj_idAttributeName() {
-        return "ns1:name";
-    }
+//    public String getObj_idAttributeName() {
+//        return "ns1:name";
+//    }
 
     public void setObj_id(String obj_id) {
         this.obj_id = obj_id;
@@ -53,6 +54,16 @@ public class Request {
     }
 
     public void setTel_priv(String tel_priv) {
+        this.tel_priv = tel_priv;
+    }
+
+    public Request(){}
+
+    public Request(String obj_id, String code, String mobile_priv, String name, String tel_priv) {
+        this.obj_id = obj_id;
+        this.code = code;
+        this.mobile_priv = mobile_priv;
+        this.name = name;
         this.tel_priv = tel_priv;
     }
 
