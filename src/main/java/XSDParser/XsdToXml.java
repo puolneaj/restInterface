@@ -27,14 +27,13 @@ public class XsdToXml {
         request.setObj_id("100");
 
         input.setRequest(request);
-        System.out.println(getBackRequest(input));
+        output=getBackRequest(input);
+        System.out.println(output.toString());
     }
-
-    public static StringBuffer getBackRequest(Input input) throws TransformerConfigurationException {
-
+    //TODO turn StringBuffer into Output
+    public static Output getBackRequest(Input input) throws TransformerConfigurationException {
         final String filename = "MainRequest.xsd";
         final Document doc = XSDParser.loadXsdDocument(filename);
-        Output output=new Output();
 
         String targetNamespace = XSDParser.getTargetnamespace(doc);
 
@@ -50,13 +49,12 @@ public class XsdToXml {
         HttpURLConnection con = serverManager.launchServer();
         XMLFunctionalities.sendXML(con, XMLRequest);
         StringBuffer response = XMLFunctionalities.readXXML(con);
-        output=  XMLFunctionalities.getNodeXMLResponse(response);
 
         //print the whole file XML in URL address
         System.out.println("\n - - - - - -  RECEIVE XML FROM ACTICO EXE SERVER - - - - \n");
         System.out.println("Receive the XML from Actico Execution Server: \n" + response);
 
-        return response;
+        return XMLFunctionalities.getNodeXMLResponse(response);
     }
 
 }
