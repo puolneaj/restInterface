@@ -1,6 +1,7 @@
 package XSDParser;
 
 import Model.Input;
+import Model.Output;
 import jlibs.xml.sax.XMLDocument;
 import jlibs.xml.xsd.XSInstance;
 import org.apache.xerces.xs.XSModel;
@@ -41,7 +42,6 @@ public class XMLFunctionalities {
             //close the buffered reader
             in.close();
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,7 +56,7 @@ public class XMLFunctionalities {
         return string;
     }
 
-    public static Document modifyXML(StringWriter stringWriter, Input input){
+    public static Document modifyXMLRequest(StringWriter stringWriter, Input input) {
         //parse document with respect to XML nodes
         Document document = null;
 
@@ -88,26 +88,54 @@ public class XMLFunctionalities {
 
     }
 
-    public static void sendXML(HttpURLConnection con, String XMLRequest){
-        int responseCode=0;
-        try{
+    public static Output getNodeXMLResponse(StringBuffer stringWriter) {
+        //parse document with respect to XML nodes
+        Document document = null;
+        Output output = new Output();
+
+        try {
+            document = DocumentBuilderFactory.newInstance().newDocumentBuilder().
+                    parse(new InputSource(new StringReader(stringWriter.toString())));
+        } catch (SAXException | IOException | ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+
+        NodeList nodeList = document.getElementsByTagName("output");
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Element elem = (Element) nodeList.item(i);
+            Node nodeIDKey = elem.getElementsByTagName("obj_id_key").item(0).getFirstChild();
+            Node nodeStatus = elem.getElementsByTagName("status").item(0).getFirstChild();
+
+            output.setObj_id_key(nodeIDKey.getNodeValue());
+            output.setStatus(nodeStatus.getNodeValue());
+        }
+        return output;
+
+    }
+
+    public static void sendXML(HttpURLConnection con, String XMLRequest) {
+        int responseCode = 0;
+        try {
             con.setDoOutput(true);
             OutputStream outStream = con.getOutputStream();
             OutputStreamWriter outStreamWriter = new OutputStreamWriter(outStream, "UTF-8");
             outStreamWriter.write(XMLRequest);
+
             outStreamWriter.flush();
             outStreamWriter.close();
             outStream.close();
+            System.out.println("\n - - - - - - SEND XML- - - - - \n");
             responseCode = con.getResponseCode();
-        }catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-                //get the response code of the HTTP protocol
+        //get the response code of the HTTP protocol
 
         System.out.println("Response Code : " + responseCode);
     }
 
-    public static StringWriter getXML( XSModel xsModel,String targetNamespace) throws TransformerConfigurationException {
+    public static StringWriter getXML(XSModel xsModel, String targetNamespace) throws TransformerConfigurationException {
         // Define defaults for the XML generation
         XSInstance instance = new XSInstance();
         instance.minimumElementsGenerated = 1;
