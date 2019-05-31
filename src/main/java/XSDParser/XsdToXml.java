@@ -14,7 +14,17 @@ import java.net.HttpURLConnection;
 
 
 public class XsdToXml {
+
+
     public static void main(String args[]) throws TransformerConfigurationException {
+
+        System.out.println(getBackRequest());
+
+    }
+
+    public static StringBuffer getBackRequest() throws TransformerConfigurationException {
+
+
         final String filename = "MainRequest.xsd";
         final Document doc = XSDParser.loadXsdDocument(filename);
 
@@ -28,8 +38,8 @@ public class XsdToXml {
         request.setTel_priv("00297616881");
         request.setObj_id("100");
 
-        input.setRequest(request);
 
+        input.setRequest(request);
         String targetNamespace=XSDParser.getTargetnamespace(doc);
 
         // Parse the file into an XSModel object
@@ -46,8 +56,9 @@ public class XsdToXml {
         StringBuffer response= XMLFunctionalities.readXXML(con);
 
         //print the whole file XML in URL address
-        System.out.println("Receive the XML from Actico Execution Server: " + response);
+        //System.out.println("Receive the XML from Actico Execution Server: " + response);
 
+        return response;
     }
 
 }

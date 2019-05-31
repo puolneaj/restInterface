@@ -1,8 +1,10 @@
 package com.actico.restInterface;
 
 import Model.Request;
+import XSDParser.XsdToXml;
 import org.springframework.stereotype.Component;
 
+import javax.xml.transform.TransformerConfigurationException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -51,4 +53,10 @@ public class requestDaoService {
         }
         return null;
     }
+
+    public StringBuffer acticoResponse() throws TransformerConfigurationException {
+        StringBuffer answer= XsdToXml.getBackRequest();
+        return answer;
+    }
+
 }

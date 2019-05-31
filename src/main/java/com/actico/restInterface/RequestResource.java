@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
+import javax.xml.transform.TransformerConfigurationException;
 import java.net.URI;
 import java.util.List;
 
@@ -49,5 +49,23 @@ public class RequestResource{
             throw new RequestNotFoundException("id - "+id);
         }
     }
+
+    @PostMapping(path="/requestsACTICO")
+    public ResponseEntity<Object> triggerExecutionServer() throws TransformerConfigurationException {
+        StringBuffer savedRequest=service.acticoResponse();
+
+        URI location=ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/1")
+                .buildAndExpand().toUri();
+
+        return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping(path="/requestsACTICO")
+    public StringBuffer retrieveAllACTICORequests() throws TransformerConfigurationException{
+        return service.acticoResponse();
+    }
+
 
 }
