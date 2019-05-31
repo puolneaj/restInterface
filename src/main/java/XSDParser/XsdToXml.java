@@ -14,19 +14,7 @@ import java.net.HttpURLConnection;
 
 
 public class XsdToXml {
-
-
     public static void main(String args[]) throws TransformerConfigurationException {
-
-        System.out.println(getBackRequest());
-
-    }
-
-    public static StringBuffer getBackRequest() throws TransformerConfigurationException {
-
-
-        final String filename = "MainRequest.xsd";
-        final Document doc = XSDParser.loadXsdDocument(filename);
 
         Request request = new Request();
         Input input = new Input();
@@ -38,25 +26,35 @@ public class XsdToXml {
         request.setTel_priv("00297616881");
         request.setObj_id("100");
 
-
         input.setRequest(request);
-        String targetNamespace=XSDParser.getTargetnamespace(doc);
+        System.out.println(getBackRequest(input));
+    }
+
+    public static StringBuffer getBackRequest(Input input) throws TransformerConfigurationException {
+
+        final String filename = "MainRequest.xsd";
+        final Document doc = XSDParser.loadXsdDocument(filename);
+        Output output=new Output();
+
+        String targetNamespace = XSDParser.getTargetnamespace(doc);
 
         // Parse the file into an XSModel object
         XSModel xsModel = new XSParser().parse(filename);
 
-        StringWriter stringWriter= XMLFunctionalities.getXML(xsModel, targetNamespace);
+        StringWriter stringWriter = XMLFunctionalities.getXML(xsModel, targetNamespace);
 
         System.out.println("\n - - - - - Modify the XML attributes - - - - - -  \n");
-        Document document = XMLFunctionalities.modifyXML(stringWriter,input);
+        Document document = XMLFunctionalities.modifyXMLRequest(stringWriter, input);
         String XMLRequest = XMLFunctionalities.getXmlDocument(document);
-        System.out.println("XML REQUEST IS: "+XMLRequest);
-        HttpURLConnection con =serverManager.launchServer();
+        System.out.println("- - - - - XML REQUEST IS: \n\n" + XMLRequest);
+        HttpURLConnection con = serverManager.launchServer();
         XMLFunctionalities.sendXML(con, XMLRequest);
-        StringBuffer response= XMLFunctionalities.readXXML(con);
+        StringBuffer response = XMLFunctionalities.readXXML(con);
+        output=  XMLFunctionalities.getNodeXMLResponse(response);
 
         //print the whole file XML in URL address
-        //System.out.println("Receive the XML from Actico Execution Server: " + response);
+        System.out.println("\n - - - - - -  RECEIVE XML FROM ACTICO EXE SERVER - - - - \n");
+        System.out.println("Receive the XML from Actico Execution Server: \n" + response);
 
         return response;
     }
