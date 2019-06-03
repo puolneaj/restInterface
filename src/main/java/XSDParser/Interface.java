@@ -1,7 +1,6 @@
 package XSDParser;
 
 import javax.xml.transform.TransformerConfigurationException;
-
 import Model.*;
 
 import org.apache.xerces.xs.XSModel;
@@ -15,7 +14,7 @@ import java.net.HttpURLConnection;
 /**
  * main class which uses the functionalities of XML and XSD
  */
-public class XsdToXml {
+public class Interface {
     /**
      * trigger Actico Server and get a response from an hardcoded request
      * print the output generated
@@ -35,8 +34,8 @@ public class XsdToXml {
         request.setObj_id("100");
 
         input.setRequest(request);
-        output=getBackRequest(input);
-        System.out.println(output.toString());
+
+        System.out.println(getResponse(input).toString());
     }
 
     /**
@@ -45,31 +44,26 @@ public class XsdToXml {
      * @return the output model on which the XML file response is based upon
      * @throws TransformerConfigurationException
      */
-    //TODO check if there is no better way to chose the parameteres of the method -> remove input
-    public static Output getBackRequest(Input input) throws TransformerConfigurationException {
-        final String filename = "MainRequest.xsd";
-        final Document doc = XSDParser.loadXsdDocument(filename);
-
-        String targetNamespace = XSDParser.getTargetnamespace(doc);
+    //TODO check if there is no better way to chose the parameters of the method -> remove input
+    public static Output getResponse(Input input) throws TransformerConfigurationException {
+        final String filename = "MainRequest.xsd";              /* XSD file governing the XML structure  */
+        final Document doc = XSDFeature.loadXSDDocument(filename);
 
         // Parse the file into an XSModel object
         XSModel xsModel = new XSParser().parse(filename);
 
-        StringWriter stringWriter = XMLFunctionalities.getXML(xsModel, targetNamespace);
+        StringWriter stringWriter = XMLFeature.getXML(xsModel, XSDFeature.getTargetnamespace(doc), "input");
 
         System.out.println("\n - - - - - Modify the XML attributes - - - - - -  \n");
-        Document document = XMLFunctionalities.modifyXMLRequest(stringWriter, input);
-        String XMLRequest = XMLFunctionalities.getXmlDocument(document);
+        Document document = XMLFeature.modifyXMLRequest(stringWriter, input);
+        String XMLRequest = XMLFeature.getXmlDocument(document);
         System.out.println("- - - - - XML REQUEST IS: \n\n" + XMLRequest);
         HttpURLConnection con = serverManager.launchServer();
-        XMLFunctionalities.sendXML(con, XMLRequest);
-        StringBuffer response = XMLFunctionalities.readXXML(con);
-
+        XMLFeature.sendXML(con, XMLRequest);
+        StringBuilder response = XMLFeature.readXML(con);
         //print the whole file XML in URL address
-        System.out.println("\n - - - - - -  RECEIVE XML FROM ACTICO EXE SERVER - - - - \n");
-        System.out.println("Receive the XML from Actico Execution Server: \n" + response);
-
-        return XMLFunctionalities.getNodeXMLResponse(response);
+        System.out.println("\n - - - - - -  RECEIVE XML FROM ACTICO EXE SERVER - - - - \n"+response);
+        return XMLFeature.getXMLResponse(response, "output");
     }
 
 }

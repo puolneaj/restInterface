@@ -25,31 +25,27 @@ import java.net.HttpURLConnection;
 /**
  * repository of methods related to XML
  */
-public class XMLFunctionalities {
+public class XMLFeature {
 
     /**
      * read the XML using Bufferedreader
+     * BufferedReader simplifies reading text from a character input stream
      * @param con connection Http from which the stream is read
      * @return response, a string value of what the contains the Http connection
      */
-    public static StringBuffer readXXML(HttpURLConnection con) {
+    public static StringBuilder readXML(HttpURLConnection con) {
 
         System.out.println("\n------READ THE WHOLE DOCUMENT USING BUFFEREDREADER-------\n");
         //set the variables
         String inputLine = "";
-        StringBuffer response = new StringBuffer();
+        StringBuilder response = new StringBuilder();
         try {
-            //BufferedReader simplifies reading text from a character input stream
-            //opening the bufferedReader
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
-            //read line by line the document
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine + "\n");
             }
-            //close the buffered reader
             in.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,6 +54,7 @@ public class XMLFunctionalities {
 
     /**
      * Allow to manipulate a document
+     *
      * @param document
      * @return a string with the value of the document
      */
@@ -65,28 +62,39 @@ public class XMLFunctionalities {
         DOMImplementationLS domImplementationLS = (DOMImplementationLS) document
                 .getImplementation();
         LSSerializer lsSerializer = domImplementationLS.createLSSerializer();
-        String string = lsSerializer.writeToString(document);
-        return string;
+        return lsSerializer.writeToString(document);
     }
 
     /**
-     * change a string into a XML document
-     * parse the XML document
-     * set the XML nodes following the object input
-     * @param stringWriter string corresponding to the future XML file
-     * @param input object model used to set the attributes value of XML file
-     * @return
+     * Generic Method
+     * parse document with respect to XML nodes
+     *
+     * @param stringWriter string with the content of the XML
+     * @return document using document builder
      */
-    public static Document modifyXMLRequest(StringWriter stringWriter, Input input) {
-        //parse document with respect to XML nodes
+    public static Document buildDocumentFromString(StringWriter stringWriter) {
         Document document = null;
-
         try {
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().
                     parse(new InputSource(new StringReader(stringWriter.toString())));
         } catch (SAXException | IOException | ParserConfigurationException e) {
             e.printStackTrace();
         }
+        return document;
+    }
+
+    /**
+     * Specific Method
+     * set the XML nodes following the object input
+     *
+     * @param stringWriter string corresponding to the future XML file
+     * @param input        object model used to set the attributes value of XML file
+     * @return
+     */
+    //TODO
+    public static Document modifyXMLRequest(StringWriter stringWriter, Input input) {
+
+        Document document = XMLFeature.buildDocumentFromString(stringWriter);
 
         NodeList nodeList = document.getElementsByTagName("ns:Request");
 
@@ -103,30 +111,27 @@ public class XMLFunctionalities {
             nodeCode.setNodeValue(input.getRequest().getCode());
             nodeTel.setNodeValue(input.getRequest().getTel_priv());
             nodeMobile.setNodeValue(input.getRequest().getMobile_priv());
-
         }
         return document;
-
     }
 
     /**
+     * Specific Method
      * take out attributes values of XML node
-     * @param stringWriter string corresponding to the XML file
+     *
+     * @param stringBuilder string corresponding to the XML file
+     * @param nodeName
      * @return output object with the XML attributes values in the object fields
      */
-    public static Output getNodeXMLResponse(StringBuffer stringWriter) {
-        //parse document with respect to XML nodes
-        Document document = null;
+    //TODO
+    public static Output getXMLResponse(StringBuilder stringBuilder, String nodeName) {
+
         Output output = new Output();
 
-        try {
-            document = DocumentBuilderFactory.newInstance().newDocumentBuilder().
-                    parse(new InputSource(new StringReader(stringWriter.toString())));
-        } catch (SAXException | IOException | ParserConfigurationException e) {
-            e.printStackTrace();
-        }
+        //parse document with respect to XML nodes
+        Document document = buildDocumentFromBuffer(stringBuilder);
 
-        NodeList nodeList = document.getElementsByTagName("output");
+        NodeList nodeList = document.getElementsByTagName(nodeName);    /* nodeName = 'output' */
 
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element elem = (Element) nodeList.item(i);
@@ -141,9 +146,28 @@ public class XMLFunctionalities {
     }
 
     /**
+     * Generic Method
+     * parse document with respect to XML nodes
+     *
+     * @param stringBuilder string with the content of the XML
+     * @return document using document builder
+     */
+    public static Document buildDocumentFromBuffer(StringBuilder stringBuilder) {
+        Document document = null;
+        try {
+            document = DocumentBuilderFactory.newInstance().newDocumentBuilder().
+                    parse(new InputSource(new StringReader(stringBuilder.toString())));
+        } catch (SAXException | IOException | ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        return document;
+    }
+
+    /**
      * send a given XML file on a given connection Http
      * access the response code
-     * @param con Http Connection
+     *
+     * @param con        Http Connection
      * @param XMLRequest XML file with the request
      */
     public static void sendXML(HttpURLConnection con, String XMLRequest) {
@@ -167,14 +191,22 @@ public class XMLFunctionalities {
     }
 
     /**
+     * generic method
      * get an XML Document
+     * depends on the name of the node element
      * turn the XML Document into a string
-     * @param xsModel structure of the XML (XML Schema Definition)
-     * @param targetNamespace --no idea
+     * The root element depends on the two parameters, the target namespace and the name of the node.
+     *
+     * @param xsModel         structure of the XML (XML Schema Definition)
+     * @param targetNamespace XML Namespace is a mechanism to avoid name conflicts by differentiating elements
+     *                        or attributes within an XML document that may have identical names,
+     *                        but different definitions.
+     * @param nodeName        name of the node from which the information is taken in the method.
      * @return return a string which represents the XML Document
      * @throws TransformerConfigurationException
      */
-    public static StringWriter getXML(XSModel xsModel, String targetNamespace) throws TransformerConfigurationException {
+    //TODO
+    public static StringWriter getXML(XSModel xsModel, String targetNamespace, String nodeName) throws TransformerConfigurationException {
         // Define defaults for the XML generation
         XSInstance instance = new XSInstance();
         instance.minimumElementsGenerated = 1;
@@ -189,12 +221,14 @@ public class XMLFunctionalities {
 
 // Build the sample xml doc
 // Replace first param to XMLDoc with a file input stream to write to file
-        QName rootElement = new QName(targetNamespace, "input");
+        QName rootElement = new QName(targetNamespace, nodeName);
         StringWriter stringWriter = new StringWriter();
         XMLDocument sampleXml = new XMLDocument(new StreamResult(stringWriter), true, 4, null);
+        //instance.generate feeds the xml into stringwriter
         instance.generate(xsModel, rootElement, sampleXml);
 
-        System.out.println(stringWriter.toString());
+        System.out.println("XMLFeature.getXML: \n" + stringWriter.toString());
+
         return stringWriter;
     }
 }

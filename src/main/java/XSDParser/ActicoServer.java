@@ -1,4 +1,4 @@
-package XMLReader;
+package XSDParser;
 
 import Model.Request;
 import Model.Input;
@@ -20,7 +20,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ReadXML {
+public class ActicoServer {
     /**
      * read an XML file
      * method is not necessary at the moment
@@ -31,7 +31,7 @@ public class ReadXML {
      * @param args
      */
     public static void main(String[] args) {
-        ReadXML localhost = new ReadXML();
+        ActicoServer localhost = new ActicoServer();
         localhost.getResponse();
     }
 
@@ -39,6 +39,7 @@ public class ReadXML {
      * connect with Actico Server for a given rule
      * pass the authentication gate
      * set a hardcoded request
+     * get a response from Actico server
      */
     public void getResponse() {
 

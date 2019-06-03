@@ -3,7 +3,7 @@ package com.actico.restInterface;
 import Model.Input;
 import Model.Output;
 import Model.Request;
-import XSDParser.XsdToXml;
+import XSDParser.Interface;
 import org.springframework.stereotype.Component;
 
 import javax.xml.transform.TransformerConfigurationException;
@@ -91,7 +91,7 @@ public class requestDaoService {
         Input input = new Input();
         input.setRequest(request);
 
-        Output output = XsdToXml.getBackRequest(input);
+        Output output = Interface.getResponse(input);
         outputs.add(output);
         return output;
     }
