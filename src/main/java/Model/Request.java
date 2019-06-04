@@ -1,5 +1,10 @@
 package Model;
 
+import XSDParser.ActicoInterface;
+
+/**
+ * Structure of the request embedded in {@link Input}
+ */
 public class Request {
 
     private String obj_id;
@@ -57,8 +62,19 @@ public class Request {
         this.tel_priv = tel_priv;
     }
 
+    /**
+     * Constructor used in {@link XSDParser.ActicoServer} to build the request sent to <b>Actico Server</b>.
+     */
     public Request(){}
 
+    /**
+     * Constructor used in {@link ActicoInterface} to build the hardcoded request sent to <b>Actico Server</b>.
+     * @param obj_id please refer to Model BPRequest in Actico Modeler
+     * @param code please refer to Model BPRequest in Actico Modeler
+     * @param mobile_priv please refer to Model BPRequest in Actico Modeler
+     * @param name please refer to Model BPRequest in Actico Modeler
+     * @param tel_priv please refer to Model BPRequest in Actico Modeler
+     */
     public Request(String obj_id, String code, String mobile_priv, String name, String tel_priv) {
         this.obj_id = obj_id;
         this.code = code;
@@ -67,6 +83,10 @@ public class Request {
         this.tel_priv = tel_priv;
     }
 
+    /**
+     * @deprecated - used to troubleshoot
+     * @return a standard toString()
+     */
     @Override
     public String toString() {
         return "ClassPojo [obj_id = " + obj_id + ", code = " + code + ", mobile_priv = " + mobile_priv + ", name = " + name + ", tel_priv = " + tel_priv + "]";

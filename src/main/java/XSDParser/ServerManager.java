@@ -9,10 +9,25 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * set the server settings (authentication and body of the request)
- * select the appropriate rule model
+ * Set server settings for the class {@link ActicoInterface}<br>
+ * Select the appropriate ruleService on Actico Execution Server.
  */
-public class serverManager {
+public class ServerManager {
+    /**
+     * Launch the connection with Actico Server
+     *
+     * <p>Method is called in {@link ActicoInterface}.</p>
+     *
+     * <ul>
+     *     <li>set the authentication criteria.</li>
+     *     <li>set URI with a RuleService name and rule name to access a specific Actico .wadl </li>
+     *     <li>open a HTTP connection with the URI provided.</li>
+     *     <li>set a HTTP protocol of type POST</li>
+     *     <li>set the authorization for the request body.</li>
+     *     <li>encode the request body</li>
+     * </ul>
+     * @return the HTTP connection to the <b>.wadl</b> file on ACTICO Execution Server.
+     */
     public static HttpURLConnection launchServer() {
         //TODO Get all configuration data from .properties file
         ExecutionServer execution = new ExecutionServer();
@@ -24,7 +39,6 @@ public class serverManager {
         uri.setRuleService("BPRequest");
         uri.setRule("BPRequest/MainRequest");
         uri.setVersion("0.0.1-SNAPSHOT");
-
 
         //open the connection
         HttpURLConnection con=null;

@@ -1,5 +1,7 @@
 package XSDParser;
 
+import Model.Input;
+import org.apache.xerces.xs.XSModel;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -12,13 +14,21 @@ import java.io.File;
  */
 public class XSDFeature {
     /**
-     * Generic Method
-     * Build a Document from and XSD file
-     * create a Document Builder from a document builder factory
-     * Set the parameters document builder factory
-     * The document builder parse the XSD file into a document
-     * @param inputName location of the XSD file
-     * @return XSD with a document type
+     * <b>Generic Method</b><br>
+     * Build a Document from and XSD file.
+     *
+     *
+     * <ul>
+     *     <li>Create a Document Builder from a Document Builder Factory.</li>
+     *     <li>Set the parameters of Document Builder Factory.</li>
+     *     <li>Document Builder parse the XSD file into a Document.</li>
+     * </ul>
+     *
+     * <p>This is the first method of {@link ActicoInterface#getResponse(Input) ActicoInterface#getResponse}.<br>
+     * Method {@link XMLFeature#buildXMLInstance(XSModel, String, String) buildXMLInstance} follows this method.<br>
+     *
+     * @param inputName location of the XSD file.
+     * @return XSD of type Document.
      */
     public static Document loadXSDDocument(String inputName) {
         final String filename = inputName;              /* location of the XSD file */
@@ -42,19 +52,22 @@ public class XSDFeature {
     }
 
     /**
-     * Generic method
+     * <b>Generic Method</b><br>
+     * Retrieve the targetname space from a document.
      *
-     * retrieve the targetname space from a document
-     * Definition: XML Namespace is a mechanism to avoid name conflicts by differentiating elements or
-     * attributes within an XML document that may have identical names, but different definitions.
-     * catch the root element 'schema'
-     * check the root element is not null
-     * the target name is the attribute value of the targetNamespace node
+     * <ul>
+     *     <li>Catch the root element 'schema'</li>
+     *     <li>Check if the root element is not null</li>
+     * </ul>
      *
-     * @param doc XSD of type document
-     *            XSD is provided by Actico Modeler
-     * @return the targetname of type String
-     * targetNamespace is of type 'http://www.visual-rules.com/vrpath/RuleServiceName/RuleName/'
+     * <p>XML Namespace is a mechanism to avoid name conflicts by differentiating elements or
+     * attributes within an XML document that may have identical names, but different definitions.<br>
+     * Note: the target name is the attribute value of the targetNamespace node.</p>
+     *
+     * <p>This method is used within {@link XMLFeature#buildXMLInstance(XSModel, String, String) buildXMLInstance}.</p>
+     *
+     * @param doc XSD of type document - provided by Actico Modeler
+     * @return target name of type String - of type 'http://www.visual-rules.com/vrpath/RuleServiceName/RuleName/'
      */
     public static String getTargetnamespace(Document doc){
         // Find the docs root element and use it to find the targetNamespace

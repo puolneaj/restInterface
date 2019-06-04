@@ -20,12 +20,12 @@ import java.util.List;
 @RestController
 public class RequestResource {
     /**
-     * <p>Java Object requestDaoService is set a field of {@link RequestResource}</p>
+     * <p>Java Object RequestDaoService is set a field of {@link RequestResource}</p>
      * <p>@Autowired annotation is enabled</p>
      * Used directly on properties, autowiring eliminates the need for getters and setters
      */
     @Autowired
-    private requestDaoService service;
+    private RequestDaoService service;
 
     /**
      * Display all the requests available on the endpoint
@@ -34,7 +34,7 @@ public class RequestResource {
      * It is a composed annotation that acts as a shortcut for @RequestMapping(method = RequestMethod.GET).</p>
      *
      * @return a list of all the requests in JSON format using the method <b>findAll()</b>
-     * from the class {@link requestDaoService}
+     * from the class {@link RequestDaoService}
      */
     @GetMapping(path = "/requests")
     public List<Request> retrieveAllRequests() {
@@ -52,7 +52,7 @@ public class RequestResource {
      * @throws RequestNotFoundException if the request is null.
      *
      * @return a specific request in JSON format using the method <b>findOne()</b>
-     * from the class {@link requestDaoService}
+     * from the class {@link RequestDaoService}
      */
     @GetMapping(path = "/requests/{id}")
     public Request retrieveRequest(@PathVariable String id) {
@@ -94,7 +94,7 @@ public class RequestResource {
 
     /**
      * Delete a request on the localhost:8080 with the parameter id given.
-     * Using the method deleteByid from class {@link requestDaoService}.
+     * Using the method deleteByid from class {@link RequestDaoService}.
      *
      * <p><b>@DeleteMapping annotation</b> is a composed annotation that acts as a shortcut
      * for @RequestMapping(method = RequestMethod.DELETE).</p>
@@ -113,16 +113,15 @@ public class RequestResource {
 
     /**
      * Trigger Actico Server with a given Request. It calls the method triggerExecutionServer
-     * from {@link requestDaoService}.
+     * from {@link RequestDaoService}.
      *
-     * <b>@PostMapping annotation</b> is specialized version of @RequestMapping annotation that acts as a shortcut
+     * <p><b>@PostMapping annotation</b> is specialized version of @RequestMapping annotation that acts as a shortcut
      * for @RequestMapping(method = RequestMethod.POST). @PostMapping annotated methods handle the
-     * HTTP POST requests matched with given URI expression.
-     *
-     * <p><b>@RequestBody annotation</b> indicating a method parameter should be bound to the body of the web request.</p>
+     * HTTP POST requests matched with given URI expression.<br>
+     * <b>@RequestBody annotation</b> indicating a method parameter should be bound to the body of the web request.</p>
      *
      *The location of the object (i.e. using @GetMapping(path="/requests/{id}") is correlated to the obj_id of the request
-     * (see below)
+     * (see below)<br>
      * <pre>{@code URI location = ServletUriComponentsBuilder
      *                 .fromCurrentRequest()
      *                  .path("/{id}")
@@ -146,17 +145,16 @@ public class RequestResource {
 
     /**
      * Display all the responses from ACTICO Server. Responses are gathered in JSON format
-     * following past requests.
+     * following past requests.<br>
+     * The method retrieves findAllResponses from {@link RequestDaoService}.
      *
-     * <p>The method retrieves findAllResponses from {@link requestDaoService}.</p>
-     *
-     * <p><b>@GetMapping annotation</b> maps HTTP GET requests onto specific handler methods.
+     * <p><b>@GetMapping annotation</b> maps HTTP GET requests onto specific handler methods.<br>
      * It is a composed annotation that acts as a shortcut for @RequestMapping(method = RequestMethod.GET).</p>
      *
      * @see <a href="http://localhost:8080/requestsACTICO">http://localhost:8080/requestsACTICO displays the requests</a>
      *
      * @return a list of all the answers in JSON format using the method <b>findAllResponses()</b>
-     * from the class {@link requestDaoService}. The results are in the shape of 'Output' objects.
+     * from the class {@link RequestDaoService}. The results are in the shape of 'Output' objects.
      */
     @GetMapping(path = "/requestsACTICO")
     public List<Output> retrieveAllACTICOResponses() {
@@ -166,15 +164,14 @@ public class RequestResource {
     /**
      * Display a specific response from ACTICO server.
      *
-     * <p><b>@GetMapping annotation</b> maps HTTP GET requests onto specific handler methods.
-     * It is a composed annotation that acts as a shortcut for @RequestMapping(method = RequestMethod.GET).</p>
-     *
-     * <p><b>@PathVariable annotation</b> handles dynamic URIs where one or more of the URI value works as a parameter.</p>
+     * <p><b>@GetMapping annotation</b> maps HTTP GET requests onto specific handler methods.<br>
+     * It is a composed annotation that acts as a shortcut for @RequestMapping(method = RequestMethod.GET).
+     * <b>@PathVariable annotation</b> handles dynamic URIs where one or more of the URI value works as a parameter.</p>
      *
      * @throws RequestNotFoundException if the output (i.e. response) from ACTICO is null.
      *
      * @return a specific request in JSON format using the method <b>findOneResponse(id)</b>
-     * from the class {@link requestDaoService}
+     * from the class {@link RequestDaoService}
      */
     @GetMapping(path = "/requestsACTICO/{id}")
     public Output retrieveResponse(@PathVariable String id) {
@@ -187,7 +184,7 @@ public class RequestResource {
 
     /**
      * Delete an output (i.e. the response from ACTICO server) on the localhost:8080 with the parameter id given.
-     * Using the method <b>deleteResponseById(id)</b> from class {@link requestDaoService}.
+     * Using the method <b>deleteResponseById(id)</b> from class {@link RequestDaoService}.
      *
      * <p><b>@DeleteMapping annotation</b> is a composed annotation that acts as a shortcut
      * for @RequestMapping(method = RequestMethod.DELETE).</p>

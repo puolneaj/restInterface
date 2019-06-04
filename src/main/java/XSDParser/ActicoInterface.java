@@ -3,6 +3,7 @@ package XSDParser;
 import javax.xml.transform.TransformerConfigurationException;
 import Model.*;
 
+import com.actico.restInterface.RequestDaoService;
 import org.apache.xerces.xs.XSModel;
 import org.w3c.dom.Document;
 
@@ -12,20 +13,21 @@ import java.io.*;
 import java.net.HttpURLConnection;
 
 /**
- * main class which uses the functionalities of XML and XSD
+ * <b> Backbone of the project.</b>
  */
-public class Interface {
+public class ActicoInterface {
     /**
-     * trigger Actico Server and get a response from an hardcoded request
-     * print the output generated
-     * @param args
+     * <b>Main Method</b><br>
+     * Trigger Actico Server and {@link #getResponse(Input) getResponse} from an hardcoded request.
+     *
+     * Print the output generated
+     * @param args argument not required
      * @throws TransformerConfigurationException
      */
     public static void main(String args[]) throws TransformerConfigurationException {
 
         Request request = new Request();
         Input input = new Input();
-        Output output = new Output();
 
         request.setCode("VR32");
         request.setMobile_priv("00336758697");
@@ -39,7 +41,22 @@ public class Interface {
     }
 
     /**
-     * main method which triggers Actico server
+     * Trigger Actico server - Backbone of the project.
+     *
+     *<p>Set of nested methods used in this method</p>
+     * <ul>
+     *     <li>{@link XSDFeature#loadXSDDocument(String) loadXSDDocument}</li>
+     *     <li>{@link XMLFeature#buildXMLInstance(XSModel, String, String) buildXMLInstance}</li>
+     *     <li>{@link XMLFeature#modifyXMLRequest(StringWriter, Input) modifyXMLRequest }</li>
+     *     <li>{@link XMLFeature#getXMLDocument(Document) getXMLDocument}</li>
+     *     <li>{@link XMLFeature#sendXMLRequest(HttpURLConnection, String) sendXMLRequest}</li>
+     *     <li>{@link XMLFeature#readXMLResponse(HttpURLConnection) readXMLResponse}</li>
+     *     <li>{@link XMLFeature#castXMLintoOutput(StringBuilder, String) castXMLintoOutput}</li>
+     * </ul>
+     *
+     * <p>Called in {@link #main(String[]) ActicoInterface#main} method for troubleshoot purpose.<br>
+     *  Called in REST interface Application within {@link RequestDaoService#acticoResponse(Request) RequestDaoService#acticoResponse} method.</p>
+     *
      * @param input the model on which the XML file request is based upon
      * @return the output model on which the XML file response is based upon
      * @throws TransformerConfigurationException
@@ -52,18 +69,18 @@ public class Interface {
         // Parse the file into an XSModel object
         XSModel xsModel = new XSParser().parse(filename);
 
-        StringWriter stringWriter = XMLFeature.getXML(xsModel, XSDFeature.getTargetnamespace(doc), "input");
+        StringWriter stringWriter = XMLFeature.buildXMLInstance(xsModel, XSDFeature.getTargetnamespace(doc), "input");
 
         System.out.println("\n - - - - - Modify the XML attributes - - - - - -  \n");
         Document document = XMLFeature.modifyXMLRequest(stringWriter, input);
-        String XMLRequest = XMLFeature.getXmlDocument(document);
+        String XMLRequest = XMLFeature.getXMLDocument(document);
         System.out.println("- - - - - XML REQUEST IS: \n\n" + XMLRequest);
-        HttpURLConnection con = serverManager.launchServer();
-        XMLFeature.sendXML(con, XMLRequest);
-        StringBuilder response = XMLFeature.readXML(con);
+        HttpURLConnection con = ServerManager.launchServer();
+        XMLFeature.sendXMLRequest(con, XMLRequest);
+        StringBuilder response = XMLFeature.readXMLResponse(con);
         //print the whole file XML in URL address
         System.out.println("\n - - - - - -  RECEIVE XML FROM ACTICO EXE SERVER - - - - \n"+response);
-        return XMLFeature.getXMLResponse(response, "output");
+        return XMLFeature.castXMLintoOutput(response, "output");
     }
 
 }

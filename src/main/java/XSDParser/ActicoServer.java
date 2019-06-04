@@ -20,15 +20,21 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Focus on the connection point with <b>Actico Server</b>, i.e. localhost:8087.
+ * @deprecated class and methods aim are to debug.
+ */
 public class ActicoServer {
     /**
-     * read an XML file
-     * method is not necessary at the moment
-     * can be useful for later stage of the project
-     * send the request in XML format
-     * read and parse the XML response
-     * insert the XML nodes attributes into output object
-     * @param args
+     * Call the method <b>getResponse()</b>.
+     * <ul>
+     *     <li>read an XML file.</li>
+     *     <li>send the Request in XML format.</li>
+     *     <li>read and parse the XML response from Actico Server.</li>
+     *     <li>insert the XML nodes attributes into Output object.</li>
+     * </ul>
+     * @deprecated class and methods aim are to debug.
+     * @param args argument not in use
      */
     public static void main(String[] args) {
         ActicoServer localhost = new ActicoServer();
@@ -36,10 +42,15 @@ public class ActicoServer {
     }
 
     /**
-     * connect with Actico Server for a given rule
-     * pass the authentication gate
-     * set a hardcoded request
-     * get a response from Actico server
+     * Deal with Actico Server.
+     * <ul>
+     * <li>connect with Actico Server for a given rule.</li>
+     * <li>pass the authentication gate.</li>
+     * <li>set a hardcoded request via the <b>toString()</b> method of {@link Input}.</li>
+     * <li>get a response from Actico server.</li>
+     * <li>insert the attributes value of XML nodes in {@link Output} attributes.</li>
+     * </ul>
+     * @deprecated aimed to debug.
      */
     public void getResponse() {
 
@@ -54,7 +65,6 @@ public class ActicoServer {
             uri.setRuleService("BPRequest");
             uri.setRule("BPRequest/MainRequest");
             uri.setVersion("0.0.1-SNAPSHOT");
-
 
             Request request = new Request();
             Input input = new Input();
@@ -111,7 +121,7 @@ public class ActicoServer {
             in.close();
 
             //read the whole file XML in URL address
-            System.out.println("Send the XML to Actico Execution Server: " + response);
+            System.out.println("Send the XML to ACTICO Execution Server: " + response);
 
             System.out.println("---------------READ A SPECIFIC XML NODE-----------------\n");
 

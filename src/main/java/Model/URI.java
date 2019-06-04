@@ -1,5 +1,10 @@
 package Model;
 
+import XSDParser.ActicoInterface;
+
+/**
+ * Model URI which feeds the classes {@link XSDParser.ActicoServer} and {@link ActicoInterface}
+ */
 public class URI {
 
     private String ruleService = "";
@@ -30,6 +35,10 @@ public class URI {
         this.rule = rule;
     }
 
+    /**
+     * Build the URL address to which the request of type {@link Input} is addressed.
+     * @return URL address on <b>Actico Server</b>, i.e. localhost:8087.
+     */
     @Override
     public String toString() {
         return "http://localhost:8087/executionserver/rest/1/ruleServices/" +

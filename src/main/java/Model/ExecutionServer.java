@@ -1,6 +1,10 @@
 package Model;
 
+/**
+ * Model of ACTICO Execution Server.
+ */
 public class ExecutionServer {
+
     private String url="";
     private String username="";
     private String password="";
@@ -34,6 +38,9 @@ public class ExecutionServer {
         return userpassword;
     }
 
+    /**
+     * Build with this.<b>getUsername</b> and this.<b>getPassword</b>.
+     */
     public void setUserpassword() {
         this.userpassword = this.getUsername()+":"+this.getPassword();
     }
