@@ -24,7 +24,7 @@ public class XSDFeature {
      *     <li>Document Builder parse the XSD file into a Document.</li>
      * </ul>
      *
-     * <p>This is the first method of {@link ActicoInterface#getResponse(Input) ActicoInterface#getResponse}.<br>
+     * <p>This is the first method of {@link ActicoInterface#getXMLResponse(Input) ActicoInterface#getXMLResponse}.<br>
      * Method {@link XMLFeature#buildXMLInstance(XSModel, String, String) buildXMLInstance} follows this method.<br>
      *
      * @param inputName location of the XSD file.

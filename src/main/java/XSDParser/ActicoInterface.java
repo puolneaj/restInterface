@@ -18,7 +18,7 @@ import java.net.HttpURLConnection;
 public class ActicoInterface {
     /**
      * <b>Main Method</b><br>
-     * Trigger Actico Server and {@link #getResponse(Input) getResponse} from an hardcoded request.
+     * Trigger Actico Server and {@link #getXMLResponse(Input) getXMLResponse} from an hardcoded request.
      *
      * Print the output generated
      * @param args argument not required
@@ -37,7 +37,7 @@ public class ActicoInterface {
 
         input.setRequest(request);
 
-        System.out.println(getResponse(input).toString());
+        System.out.println(getXMLResponse(input).toString());
     }
 
     /**
@@ -62,7 +62,7 @@ public class ActicoInterface {
      * @throws TransformerConfigurationException
      */
     //TODO check if there is no better way to chose the parameters of the method -> remove input
-    public static Output getResponse(Input input) throws TransformerConfigurationException {
+    public static Output getXMLResponse(Input input) throws TransformerConfigurationException {
         final String filename = "MainRequest.xsd";              /* XSD file governing the XML structure  */
         final Document doc = XSDFeature.loadXSDDocument(filename);
 
@@ -83,4 +83,9 @@ public class ActicoInterface {
         return XMLFeature.castXMLintoOutput(response, "output");
     }
 
+    public static void getJSONResponse(){
+
+    }
+
 }
+

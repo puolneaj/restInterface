@@ -100,7 +100,7 @@ public class RequestDaoService {
      *     Link the localhost:8080 to localhost:8087.
      * <p>Method is called in the class {@link RequestResource}.<br>
      * Call Actico Execution Server via class {@link ActicoInterface} in the piece of code :<br>
-     * <pre>{@code Output output = ActicoInterface.getResponse(input);}</pre><br>
+     * <pre>{@code Output output = ActicoInterface.getXMLResponse(input);}</pre><br>
      * Add the output to the list '<b>outputs</b>.
      * @param request {@link Request}
      * @return {@link Output}
@@ -110,7 +110,7 @@ public class RequestDaoService {
         Input input = new Input();
         input.setRequest(request);
 
-        Output output = ActicoInterface.getResponse(input);
+        Output output = ActicoInterface.getXMLResponse(input);
         outputs.add(output);
         return output;
     }

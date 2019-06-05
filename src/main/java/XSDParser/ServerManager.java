@@ -14,7 +14,9 @@ import java.net.URL;
  */
 public class ServerManager {
     /**
+     * <b>Specific Method</b>
      * Launch the connection with Actico Server
+     *
      *
      * <p>Method is called in {@link ActicoInterface}.</p>
      *
@@ -54,6 +56,7 @@ public class ServerManager {
             con.setRequestProperty("Authorization", "Basic " +
                     encodedAuthorization);
             //set the body of the request
+            //con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
             con.setRequestProperty("Content-Type", "application/xml; charset=utf-8");
             con.setRequestProperty("Expect", "100-continue");
 

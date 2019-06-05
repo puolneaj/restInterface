@@ -154,7 +154,7 @@ public class XMLFeature {
      * </ul>
      *
      * <p>Method {@link #readXMLResponse(HttpURLConnection) readXMLResponse} is preceding this method.<br>
-     * This method is the last method of {@link ActicoInterface#getResponse(Input) ActicoInterface#getResponse}.<br>
+     * This method is the last method of {@link ActicoInterface#getXMLResponse(Input) ActicoInterface#getXMLResponse}.<br>
      * Method {@link #buildDocumentFromBuffer(StringBuilder) buildDocumentFromBuffer} is nested in this method.</p>
      *
      * @param stringBuilder string corresponding to the XML file.
