@@ -2,11 +2,12 @@ package XSDParser;
 
 import Model.ExecutionServer;
 import Model.URI;
-import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  * Set server settings for the class {@link ActicoInterface}<br>
@@ -30,8 +31,9 @@ public class ServerManager {
      * </ul>
      * @return the HTTP connection to the <b>.wadl</b> file on ACTICO Execution Server.
      */
-    public static HttpURLConnection launchServer() {
+    public static HttpURLConnection launchServer() throws IOException {
         //TODO Get all configuration data from .properties file
+        //url is fixed and stated
         ExecutionServer execution = new ExecutionServer();
         execution.setUsername("DEFAULT\\Admin");
         execution.setPassword("Admin");
@@ -42,27 +44,21 @@ public class ServerManager {
         uri.setRule("BPRequest/MainRequest");
         uri.setVersion("0.0.1-SNAPSHOT");
 
+        //create the object URL
+        URL obj = new URL(uri.toString());
         //open the connection
-        HttpURLConnection con=null;
-        try {
-            URL obj = new URL(uri.toString());
-            con = (HttpURLConnection) obj.openConnection();
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        //HTTP POST
+        con.setRequestMethod("POST");
+        //set the body of the request
+        con.setRequestProperty("Content-Type", "application/json");
+        con.setRequestProperty("Accept", "application/json");
+        con.setDoOutput(true);
 
-            //HTTP POST
-            con.setRequestMethod("POST");
-            // Basic authentication
-            BASE64Encoder enc = new sun.misc.BASE64Encoder();
-            String encodedAuthorization = enc.encode(execution.getUserpassword().getBytes());
-            con.setRequestProperty("Authorization", "Basic " +
-                    encodedAuthorization);
-            //set the body of the request
-            //con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
-            con.setRequestProperty("Content-Type", "application/xml; charset=utf-8");
-            con.setRequestProperty("Expect", "100-continue");
+        String basicAuth = Base64.getEncoder().encodeToString(execution.getUserpassword().getBytes(StandardCharsets.UTF_8));
+        con.setRequestProperty("Authorization", "Basic " + basicAuth);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }return con;
+        return con;
     }
 
 }

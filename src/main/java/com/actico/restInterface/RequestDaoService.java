@@ -1,13 +1,12 @@
 package com.actico.restInterface;
 
-import Model.Input;
 import Model.Output;
 import Model.Request;
 import XSDParser.ActicoInterface;
-import XSDParser.ActicoServer;
 import org.springframework.stereotype.Component;
 
 import javax.xml.transform.TransformerConfigurationException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -101,17 +100,13 @@ public class RequestDaoService {
      *     Link the localhost:8080 to localhost:8087.
      * <p>Method is called in the class {@link RequestResource}.<br>
      * Call Actico Execution Server via class {@link ActicoInterface} in the piece of code :<br>
-     * <pre>{@code Output output = ActicoInterface.getXMLResponse(input);}</pre><br>
+     * <pre>{@code Output output = ActicoInterface.getResponse(input);}</pre><br>
      * Add the output to the list '<b>outputs</b>.
      * @param request {@link Request}
      * @return {@link Output}
-     * @throws TransformerConfigurationException if there is an fatal error of configuration
      */
-    public Output acticoResponse(Request request) throws TransformerConfigurationException {
-        /*Input input = new Input();
-        input.setRequest(request);
-        Output output = ActicoInterface.getXMLResponse(input);*/
-        Output output = ActicoServer.getJSONResponse();
+    public Output acticoResponse(Request request) throws IOException, TransformerConfigurationException {
+        Output output = ActicoInterface.getResponse(request);
         outputs.add(output);
         return output;
     }

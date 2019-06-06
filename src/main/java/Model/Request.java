@@ -89,6 +89,9 @@ public class Request {
      */
     @Override
     public String toString() {
-        return "ClassPojo [obj_id = " + obj_id + ", code = " + code + ", mobile_priv = " + mobile_priv + ", name = " + name + ", tel_priv = " + tel_priv + "]";
+        return "{ \"obj_id\" : "+this.getObj_id()+", \"code\" : "+
+                this.getCode()+", \"name\" : "+this.getName()+
+                ", \"tel_priv\" : "+this.getTel_priv()+", \"mobile_priv\" : "+
+                this.getTel_priv()+" }";
     }
 }

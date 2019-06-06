@@ -29,7 +29,7 @@ public class ActicoServer {
      */
     /*public static void main(String[] args) {
         ActicoServer localhost = new ActicoServer();
-        localhost.getJSONResponse();
+        localhost.getResponse();
     }*/
 
     /**
@@ -42,7 +42,7 @@ public class ActicoServer {
      * <li>insert the attributes value of XML nodes in {@link Output} attributes.</li>
      * </ul>
      */
-    public static Output getJSONResponse() {
+    public static Output getJSONResponse(Request request) {
 
         Output output=new Output();
         try {
@@ -54,24 +54,11 @@ public class ActicoServer {
             execution.setPassword("Admin");
             execution.setUserpassword();
 
-            String username = "DEFAULT\\Admin";
-            String password = "Admin";
-
             URI uri = new URI();
             uri.setRuleService("BPRequest");
             uri.setRule("BPRequest/MainRequest");
             uri.setVersion("0.0.1-SNAPSHOT");
 
-            Request request = new Request();
-
-            request.setCode("VR32");
-            request.setMobile_priv("00336758697");
-            request.setName("Durand");
-            request.setTel_priv("00297616881");
-            request.setObj_id("100");
-
-            String JSONinput = g.toJson(request);
-            System.out.println(JSONinput.toString());
             //create the object URL
             URL obj = new URL(uri.toString());
             //open the connection
@@ -83,8 +70,11 @@ public class ActicoServer {
             con.setRequestProperty("Accept", "application/json");
             con.setDoOutput(true);
 
-            String basicAuth = Base64.getEncoder().encodeToString((username + ":" + password).getBytes(StandardCharsets.UTF_8));
+            String basicAuth = Base64.getEncoder().encodeToString(execution.getUserpassword().getBytes(StandardCharsets.UTF_8));
             con.setRequestProperty("Authorization", "Basic " + basicAuth);
+
+            String JSONinput = g.toJson(request);
+            System.out.println(JSONinput);
 
             try (OutputStream os = con.getOutputStream()) {
                 byte[] input = JSONinput.getBytes();
@@ -110,7 +100,6 @@ public class ActicoServer {
             //close the buffered reader
             in.close();
 
-            //read the whole file XML in URL address
             System.out.println("ANSWER to ACTICO Execution Server: " + response);
 
             System.out.println("---------------INSERT INFORMATION INTO OUTPUT OBJECT-----------------\n");

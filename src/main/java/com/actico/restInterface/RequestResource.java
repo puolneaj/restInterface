@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.xml.transform.TransformerConfigurationException;
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -133,7 +134,7 @@ public class RequestResource {
      */
     @PostMapping(path = "/requestsACTICO")
     public ResponseEntity<Object> triggerExecutionServer(@RequestBody Request request)
-            throws TransformerConfigurationException {
+            throws TransformerConfigurationException, IOException {
         Output output = service.acticoResponse(request);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
