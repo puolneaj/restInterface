@@ -14,7 +14,6 @@ import java.util.Base64;
 /**
  * Focus on the connection point with <b>Actico Server</b>, i.e. localhost:8087.
  *
- * @deprecated class and methods aim are to debug.
  */
 public class ActicoServer {
     /**
@@ -27,27 +26,25 @@ public class ActicoServer {
      * </ul>
      *
      * @param args argument not in use
-     * @deprecated class and methods aim are to debug.
      */
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         ActicoServer localhost = new ActicoServer();
         localhost.getJSONResponse();
-    }
+    }*/
 
     /**
      * Deal with Actico Server.
      * <ul>
      * <li>connect with Actico Server for a given rule.</li>
      * <li>pass the authentication gate.</li>
-     * <li>set a hardcoded request via the <b>toStringXML()</b> method of {@link Input}.</li>
+     * <li>set a hardcoded request via the <b>toString()</b> method of {@link Input}.</li>
      * <li>get a response from Actico server.</li>
      * <li>insert the attributes value of XML nodes in {@link Output} attributes.</li>
      * </ul>
-     *
-     * @deprecated aimed to debug.
      */
-    public void getJSONResponse() {
+    public static Output getJSONResponse() {
 
+        Output output=new Output();
         try {
             Gson g = new Gson();
 
@@ -118,11 +115,13 @@ public class ActicoServer {
 
             System.out.println("---------------INSERT INFORMATION INTO OUTPUT OBJECT-----------------\n");
 
-            Output output = g.fromJson(response.toString(), Output.class);
+            output = g.fromJson(response.toString(), Output.class);
             System.out.println(output);
 
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        return output;
     }
 }

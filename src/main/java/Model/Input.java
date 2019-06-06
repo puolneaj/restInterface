@@ -16,29 +16,12 @@ public class Input {
     }
 
     /**
-     * Hardcoded XML Request to Actico Server.
-     *
-     * @deprecated - the XSD file is used to structure the XML file instead
-     * @return Hardcoded {@link Request} to Actico Server.
-     */
-    public String toStringXML() {
-        return "<input xmlns=\"http://www.visual-rules.com/vrpath/BPRequest/MainRequest/\" xmlns:ns1=\"http://www.visual-rules.com/vrpath/BPRequest/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                " <Request> " +
-                "<obj_id>" + this.getRequest().getObj_id() + "</obj_id> " +
-                "<code>" + this.getRequest().getCode() + "</code>" +
-                " <name>" + this.getRequest().getName() + "</name> " +
-                "<tel_priv>" + this.getRequest().getTel_priv() + "</tel_priv> " +
-                "<mobile_priv>" + this.getRequest().getMobile_priv() + "</mobile_priv>" +
-                " </Request> " +
-                "</input>";
-    }
-
-    /**
      * Hardcoded JSON Request to Actico Server.
      *
      * @return Hardcoded {@link Request} to Actico Server.
      */
-    public String toStringJSON(){
+    @Override
+    public String toString() {
         return "{ \"obj_id\" : "+this.getRequest().getObj_id()+", \"code\" : "+
                 this.getRequest().getCode()+", \"name\" : "+this.getRequest().getName()+
                 ", \"tel_priv\" : "+this.getRequest().getTel_priv()+", \"mobile_priv\" : "+

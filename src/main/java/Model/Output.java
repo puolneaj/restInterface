@@ -32,9 +32,6 @@ public class Output {
      */
     @Override
     public String toString() {
-        return "<output xmlns=\"http://www.visual-rules.com/vrpath/BPRequest/MainRequest/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" +
-                "   <obj_id_key>"+this.getObj_id_key()+"</obj_id_key>" +
-                "   <status>"+this.getStatus()+"</status>" +
-                "</output>";
-    }
+        return "{ \"obj_id_key\" : "+this.getObj_id_key()+", \"status\" : "+this.getStatus()+" }";
+}
 }

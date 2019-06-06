@@ -4,6 +4,7 @@ import Model.Input;
 import Model.Output;
 import Model.Request;
 import XSDParser.ActicoInterface;
+import XSDParser.ActicoServer;
 import org.springframework.stereotype.Component;
 
 import javax.xml.transform.TransformerConfigurationException;
@@ -107,10 +108,10 @@ public class RequestDaoService {
      * @throws TransformerConfigurationException if there is an fatal error of configuration
      */
     public Output acticoResponse(Request request) throws TransformerConfigurationException {
-        Input input = new Input();
+        /*Input input = new Input();
         input.setRequest(request);
-
-        Output output = ActicoInterface.getXMLResponse(input);
+        Output output = ActicoInterface.getXMLResponse(input);*/
+        Output output = ActicoServer.getJSONResponse();
         outputs.add(output);
         return output;
     }

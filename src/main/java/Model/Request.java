@@ -85,7 +85,7 @@ public class Request {
 
     /**
      * @deprecated - used to troubleshoot
-     * @return a standard toStringXML()
+     * @return a standard toString()
      */
     @Override
     public String toString() {
