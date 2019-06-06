@@ -78,7 +78,7 @@ public class RequestResource {
      * <pre>{@code URI location = ServletUriComponentsBuilder
      *                 .fromCurrentRequest()
      *                 .path("/{id}")
-     *                 .buildAndExpand(savedRequest.getObj_id()).toUri();}</pre>
+     *                 .buildAndExpand(savedRequest.getDocId()).toUri();}</pre>
      *
      * @return a ResponseEntity, e.g. represents the whole HTTP response: status code, headers, and body. The method
       * builds the object (JSON format) at a given location.
@@ -89,7 +89,7 @@ public class RequestResource {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(savedRequest.getObj_id()).toUri();
+                .buildAndExpand(savedRequest.getDocId()).toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -126,7 +126,7 @@ public class RequestResource {
      * <pre>{@code URI location = ServletUriComponentsBuilder
      *                 .fromCurrentRequest()
      *                  .path("/{id}")
-     *               .buildAndExpand(savedRequest.getObj_id()).toUri();}</pre>
+     *               .buildAndExpand(savedRequest.getDocId()).toUri();}</pre>
      * @param request is the object is fed to Actico Server
      * @return a ResponseEntity, e.g. represents the whole HTTP response: status code, headers, and body. The method
      * builds the object (JSON format) at a given location.
@@ -139,7 +139,7 @@ public class RequestResource {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(output.getObj_id_key()).toUri();
+                .buildAndExpand(output.getKey()).toUri();
 
         return ResponseEntity.created(location).build();
     }

@@ -22,10 +22,10 @@ public class Input {
      */
     @Override
     public String toString() {
-        return "{ \"obj_id\" : "+this.getRequest().getObj_id()+", \"code\" : "+
+        return "{ \"obj_id\" : "+this.getRequest().getDocId()+", \"code\" : "+
                 this.getRequest().getCode()+", \"name\" : "+this.getRequest().getName()+
-                ", \"tel_priv\" : "+this.getRequest().getTel_priv()+", \"mobile_priv\" : "+
-                this.getRequest().getTel_priv()+" }";
+                ", \"tel_priv\" : "+this.getRequest().getTelPriv()+", \"mobile_priv\" : "+
+                this.getRequest().getTelPriv()+" }";
     }
 }
 

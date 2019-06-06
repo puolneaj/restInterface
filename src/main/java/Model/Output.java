@@ -6,15 +6,16 @@ package Model;
  */
 public class Output {
 
-    private String obj_id_key;
     private String status;
 
-    public String getObj_id_key() {
-        return obj_id_key;
+    private String key;
+
+    public String getKey() {
+        return key;
     }
 
-    public void setObj_id_key(String obj_id_key) {
-        this.obj_id_key = obj_id_key;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getStatus() {
@@ -32,6 +33,6 @@ public class Output {
      */
     @Override
     public String toString() {
-        return "{ \"obj_id_key\" : "+this.getObj_id_key()+", \"status\" : "+this.getStatus()+" }";
+        return "{ \"status\" : "+this.getStatus()+" , \"key\" : "+this.getKey()+"}";
 }
 }
