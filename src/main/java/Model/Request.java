@@ -3,7 +3,7 @@ package Model;
 import XSDParser.ActicoInterface;
 
 /**
- * Structure of the request embedded in {@link Input}
+ * Structure of the request
  */
 public class Request {
 

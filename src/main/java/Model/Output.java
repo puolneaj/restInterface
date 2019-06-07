@@ -28,7 +28,6 @@ public class Output {
 
     /**
      * Hardcoded response from Actico Server.
-     * @deprecated
      * @return Hardcoded response from Actico Server.
      */
     @Override

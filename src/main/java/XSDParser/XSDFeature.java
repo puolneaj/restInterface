@@ -1,20 +1,12 @@
 package XSDParser;
 
 import Model.Request;
-import com.fasterxml.jackson.databind.AnnotationIntrospector;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonschema.JsonSchema;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
-import static java.lang.System.*;
 
 /**
  * Gather the functionalities of XSD file
@@ -83,51 +75,5 @@ public class XSDFeature {
             targetNamespace = rootElem.getAttribute("targetNamespace");
         }
         return targetNamespace;
-
-    }
-    /**
-     * Create instance of ObjectMapper with JAXB introspector
-     * and default type factory.
-     *
-     * @return Instance of ObjectMapper with JAXB introspector
-     *    and default type factory.
-     */
-    private ObjectMapper createJaxbObjectMapper()
-    {
-        final ObjectMapper mapper = new ObjectMapper();
-        final TypeFactory typeFactory = TypeFactory.defaultInstance();
-        final AnnotationIntrospector introspector = new JaxbAnnotationIntrospector(typeFactory);
-        // make deserializer use JAXB annotations (only)
-        mapper.getDeserializationConfig().with(introspector);
-        // make serializer use JAXB annotations (only)
-        mapper.getSerializationConfig().with(introspector);
-        return mapper;
-    }
-
-    /**
-     * Write JSON Schema to standard output based upon Java source
-     * code in class whose fully qualified package and class name
-     * have been provided.
-     *
-     * @param mapper Instance of ObjectMapper from which to
-     *     invoke JSON schema generation.
-     * @param fullyQualifiedClassName Name of Java class upon
-     *    which JSON Schema will be extracted.
-     */
-    private void writeToStandardOutputWithDeprecatedJsonSchema(final ObjectMapper mapper, final String fullyQualifiedClassName)
-    {
-        try
-        {
-            final JsonSchema jsonSchema = mapper.generateJsonSchema(Class.forName(fullyQualifiedClassName));
-            out.println(jsonSchema);
-        }
-        catch (ClassNotFoundException cnfEx)
-        {
-            err.println("Unable to find class " + fullyQualifiedClassName);
-        }
-        catch (JsonMappingException jsonEx)
-        {
-            err.println("Unable to map JSON: " + jsonEx);
-        }
     }
 }

@@ -4,8 +4,6 @@ import Model.Output;
 import Model.Request;
 import XSDParser.ActicoInterface;
 import org.springframework.stereotype.Component;
-
-import javax.xml.transform.TransformerConfigurationException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -105,7 +103,7 @@ public class RequestDaoService {
      * @param request {@link Request}
      * @return {@link Output}
      */
-    public Output acticoResponse(Request request) throws IOException, TransformerConfigurationException {
+    public Output acticoResponse(Request request) throws IOException {
         Output output = ActicoInterface.getResponse(request);
         outputs.add(output);
         return output;

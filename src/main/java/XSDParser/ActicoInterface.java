@@ -4,7 +4,6 @@ import javax.xml.transform.TransformerConfigurationException;
 import Model.*;
 
 import com.actico.restInterface.RequestDaoService;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 
@@ -14,7 +13,7 @@ import java.net.HttpURLConnection;
 public class ActicoInterface {
     /**
      * <b>Main Method</b><br>
-     * Trigger Actico Server and {@link #getResponse(Request) getXMLResponse} from an hardcoded request.
+     * Trigger Actico Server and {@link #getResponse(Request) getResponse} from an hardcoded request.
      *
      * Print the output generated
      * @param args argument not required
@@ -46,19 +45,12 @@ public class ActicoInterface {
      *
      * @param request the model on which the XML file request is based upon
      * @return the output model on which the XML file response is based upon
-     * @throws TransformerConfigurationException
      */
-    public static Output getResponse(Request request) throws TransformerConfigurationException, IOException {
-        HttpURLConnection con = ServerManager.launchServer();
+    public static Output getResponse(Request request) throws IOException {
+        HttpURLConnection con =ServerManager.launchServer();
         JSONFeature.writeRequest(con,request);
         StringBuffer response=JSONFeature.readJSONResponse(con);
-        Output output=JSONFeature.buildResponseObject(response);
-        return output;
-    }
-
-    public static void getResponse(){
-
+        return JSONFeature.buildResponseObject(response);
     }
 
 }
-

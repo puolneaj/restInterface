@@ -23,14 +23,12 @@ public class JSONFeature {
     public static StringBuffer readJSONResponse(HttpURLConnection con) throws IOException {
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
-        //set the variables
-        String inputLine = "";
+        String inputLine="";
         StringBuffer response = new StringBuffer();
         //read line by line the document
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine + "\n");
         }
-        //close the buffered reader
         in.close();
         return response;
     }
@@ -53,10 +51,10 @@ public class JSONFeature {
      */
     public static void writeRequest(HttpURLConnection con, Request request) {
         Gson g = new Gson();
-        String JSONinput = g.toJson(request);
-        System.out.println(JSONinput);
+        String JSONrequest = g.toJson(request);
+        System.out.println(JSONrequest);
         try (OutputStream os = con.getOutputStream()) {
-            byte[] input = JSONinput.getBytes();
+            byte[] input = JSONrequest.getBytes();
             os.write(input, 0, input.length);
         } catch (IOException e) {
             e.printStackTrace();
