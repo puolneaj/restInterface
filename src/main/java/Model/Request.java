@@ -7,18 +7,18 @@ import XSDParser.ActicoInterface;
  */
 public class Request {
 
-    private String obj_id;
+    private String docId;
 
     private String code;
 
-    private String mobile_priv;
+    private String mobilePriv;
 
     private String name;
 
-    private String tel_priv;
+    private String telPriv;
 
-    public String getObj_id() {
-        return obj_id;
+    public String getDocId() {
+        return docId;
     }
 
     //TODO possible decision for attribute name mapping
@@ -26,8 +26,8 @@ public class Request {
 //        return "ns1:name";
 //    }
 
-    public void setObj_id(String obj_id) {
-        this.obj_id = obj_id;
+    public void setDocId(String docId) {
+        this.docId = docId;
     }
 
     public String getCode() {
@@ -38,12 +38,12 @@ public class Request {
         this.code = code;
     }
 
-    public String getMobile_priv() {
-        return mobile_priv;
+    public String getMobilePriv() {
+        return mobilePriv;
     }
 
-    public void setMobile_priv(String mobile_priv) {
-        this.mobile_priv = mobile_priv;
+    public void setMobilePriv(String mobilePriv) {
+        this.mobilePriv = mobilePriv;
     }
 
     public String getName() {
@@ -54,12 +54,12 @@ public class Request {
         this.name = name;
     }
 
-    public String getTel_priv() {
-        return tel_priv;
+    public String getTelPriv() {
+        return telPriv;
     }
 
-    public void setTel_priv(String tel_priv) {
-        this.tel_priv = tel_priv;
+    public void setTelPriv(String telPriv) {
+        this.telPriv = telPriv;
     }
 
     /**
@@ -69,18 +69,18 @@ public class Request {
 
     /**
      * Constructor used in {@link ActicoInterface} to build the hardcoded request sent to <b>Actico Server</b>.
-     * @param obj_id please refer to Model BPRequest in Actico Modeler
+     * @param docId please refer to Model BPRequest in Actico Modeler
      * @param code please refer to Model BPRequest in Actico Modeler
-     * @param mobile_priv please refer to Model BPRequest in Actico Modeler
+     * @param mobilePriv please refer to Model BPRequest in Actico Modeler
      * @param name please refer to Model BPRequest in Actico Modeler
-     * @param tel_priv please refer to Model BPRequest in Actico Modeler
+     * @param telPriv please refer to Model BPRequest in Actico Modeler
      */
-    public Request(String obj_id, String code, String mobile_priv, String name, String tel_priv) {
-        this.obj_id = obj_id;
+    public Request(String docId, String code, String mobilePriv, String name, String telPriv) {
+        this.docId = docId;
         this.code = code;
-        this.mobile_priv = mobile_priv;
+        this.mobilePriv = mobilePriv;
         this.name = name;
-        this.tel_priv = tel_priv;
+        this.telPriv = telPriv;
     }
 
     /**
@@ -89,6 +89,6 @@ public class Request {
      */
     @Override
     public String toString() {
-        return "ClassPojo [obj_id = " + obj_id + ", code = " + code + ", mobile_priv = " + mobile_priv + ", name = " + name + ", tel_priv = " + tel_priv + "]";
+        return "ClassPojo [docId = " + docId + ", code = " + code + ", mobilePriv = " + mobilePriv + ", name = " + name + ", telPriv = " + telPriv + "]";
     }
 }

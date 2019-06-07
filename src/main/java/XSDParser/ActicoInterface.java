@@ -30,10 +30,10 @@ public class ActicoInterface {
         Input input = new Input();
 
         request.setCode("VR32");
-        request.setMobile_priv("00336758697");
+        request.setMobilePriv("00336758697");
         request.setName("Durand");
-        request.setTel_priv("00297616881");
-        request.setObj_id("100");
+        request.setTelPriv("00297616881");
+        request.setDocId("100");
 
         input.setRequest(request);
 

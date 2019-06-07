@@ -71,10 +71,10 @@ public class ActicoServer {
             Output output = new Output();
 
             request.setCode("VR32");
-            request.setMobile_priv("00336758697");
+            request.setMobilePriv("00336758697");
             request.setName("Durand");
-            request.setTel_priv("00297616881");
-            request.setObj_id("100");
+            request.setTelPriv("00297616881");
+            request.setDocId("100");
 
             input.setRequest(request);
 
@@ -135,7 +135,7 @@ public class ActicoServer {
                 Element errStatus = (Element) errNodesStatus.item(0);
                 Element errKey = (Element) errNodesKey.item(0);
                 output.setStatus(errStatus.getTextContent());
-                output.setObj_id_key(errKey.getTextContent());
+                output.setKey(errKey.getTextContent());
                 System.out.println("Response values from Actico Execution Server: " + output.toString());
             } else {
             }

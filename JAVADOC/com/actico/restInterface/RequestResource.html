@@ -298,7 +298,7 @@ public&nbsp;org.springframework.http.ResponseEntity&lt;java.lang.Object&gt;&nbsp
 
  <p><b>@RequestBody annotation</b> indicating a method parameter should be bound to the body of the web request.</p>
 
- The location of the object (i.e. using @GetMapping(path="/requests/{id}") is correlated to the obj_id of the request
+ The location of the object (i.e. using @GetMapping(path="/requests/{id}") is correlated to the docId of the request
  (see below)
  <pre><code> URI location = ServletUriComponentsBuilder
                  .fromCurrentRequest()
@@ -352,7 +352,7 @@ public&nbsp;org.springframework.http.ResponseEntity&lt;java.lang.Object&gt;&nbsp
  HTTP POST requests matched with given URI expression.<br>
  <b>@RequestBody annotation</b> indicating a method parameter should be bound to the body of the web request.</p>
 
-The location of the object (i.e. using @GetMapping(path="/requests/{id}") is correlated to the obj_id of the request
+The location of the object (i.e. using @GetMapping(path="/requests/{id}") is correlated to the docId of the request
  (see below)<br>
  <pre><code> URI location = ServletUriComponentsBuilder
                  .fromCurrentRequest()

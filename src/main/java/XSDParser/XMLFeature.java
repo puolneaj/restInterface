@@ -128,16 +128,16 @@ public class XMLFeature {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element elem = (Element) nodeList.item(i);
             Node nodeName = elem.getElementsByTagName("ns1:name").item(0).getFirstChild();
-            Node nodeId = elem.getElementsByTagName("ns1:obj_id").item(0).getFirstChild();
+            Node nodeId = elem.getElementsByTagName("ns1:docId").item(0).getFirstChild();
             Node nodeCode = elem.getElementsByTagName("ns1:code").item(0).getFirstChild();
-            Node nodeTel = elem.getElementsByTagName("ns1:tel_priv").item(0).getFirstChild();
-            Node nodeMobile = elem.getElementsByTagName("ns1:mobile_priv").item(0).getFirstChild();
+            Node nodeTel = elem.getElementsByTagName("ns1:telPriv").item(0).getFirstChild();
+            Node nodeMobile = elem.getElementsByTagName("ns1:mobilePriv").item(0).getFirstChild();
 
             nodeName.setNodeValue(input.getRequest().getName());
-            nodeId.setNodeValue(input.getRequest().getObj_id());
+            nodeId.setNodeValue(input.getRequest().getDocId());
             nodeCode.setNodeValue(input.getRequest().getCode());
-            nodeTel.setNodeValue(input.getRequest().getTel_priv());
-            nodeMobile.setNodeValue(input.getRequest().getMobile_priv());
+            nodeTel.setNodeValue(input.getRequest().getTelPriv());
+            nodeMobile.setNodeValue(input.getRequest().getMobilePriv());
         }
         return document;
     }
@@ -172,10 +172,10 @@ public class XMLFeature {
 
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element elem = (Element) nodeList.item(i);
-            Node nodeIDKey = elem.getElementsByTagName("obj_id_key").item(0).getFirstChild();
+            Node nodeIDKey = elem.getElementsByTagName("key").item(0).getFirstChild();
             Node nodeStatus = elem.getElementsByTagName("status").item(0).getFirstChild();
 
-            output.setObj_id_key(nodeIDKey.getNodeValue());
+            output.setKey(nodeIDKey.getNodeValue());
             output.setStatus(nodeStatus.getNodeValue());
         }
         return output;

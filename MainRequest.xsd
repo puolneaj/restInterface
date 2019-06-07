@@ -22,7 +22,7 @@
     <complexType>
       <sequence>
         <!-- Output data elements -->
-        <element nillable="true" name="obj_id_key" type="string"/>
+        <element nillable="true" name="key" type="string"/>
         <element nillable="true" name="status" type="string"/>
          <!-- Actions -->
       </sequence>
