@@ -36,7 +36,7 @@ public class URI {
     }
 
     /**
-     * Build the URL address to which the request of type {@link Input} is addressed.
+     * Build the URL address to which the {@link Request} is addressed.
      * @return URL address on <b>Actico Server</b>, i.e. localhost:8087.
      */
     @Override

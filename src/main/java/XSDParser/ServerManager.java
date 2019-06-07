@@ -1,6 +1,7 @@
 package XSDParser;
 
 import Model.ExecutionServer;
+import Model.Request;
 import Model.URI;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class ServerManager {
      * Launch the connection with Actico Server
      *
      *
-     * <p>Method is called in {@link ActicoInterface}.</p>
+     * <p>Method is called in {@link ActicoInterface#getResponse(Request) ActicoInterface#getResponse}.</p>
      *
      * <ul>
      *     <li>set the authentication criteria.</li>

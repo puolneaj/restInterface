@@ -37,7 +37,7 @@ public class ActicoServer {
      * <ul>
      * <li>connect with Actico Server for a given rule.</li>
      * <li>pass the authentication gate.</li>
-     * <li>set a hardcoded request via the <b>toString()</b> method of {@link Input}.</li>
+     * <li>set a hardcoded request via the <b>toString()</b> method of {@link Request}.</li>
      * <li>get a response from Actico server.</li>
      * <li>insert the attributes value of XML nodes in {@link Output} attributes.</li>
      * </ul>
