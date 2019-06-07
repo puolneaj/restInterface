@@ -1,4 +1,4 @@
-package XSDParser;
+package ACTICO;
 
 import Model.Output;
 import Model.Request;
@@ -11,7 +11,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
 /**
- *
+ * Gather the functionalities to manipulate JSON file.
  */
 public class JSONFeature {
     /**

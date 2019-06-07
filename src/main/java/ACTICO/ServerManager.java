@@ -1,4 +1,4 @@
-package XSDParser;
+package ACTICO;
 
 import Model.ExecutionServer;
 import Model.Request;

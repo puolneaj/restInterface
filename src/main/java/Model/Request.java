@@ -1,6 +1,6 @@
 package Model;
 
-import XSDParser.ActicoInterface;
+import ACTICO.ActicoInterface;
 
 /**
  * Structure of the request
@@ -63,7 +63,7 @@ public class Request {
     }
 
     /**
-     * Constructor used in {@link XSDParser.ActicoServer} to build the request sent to <b>Actico Server</b>.
+     * Constructor used in {@link ACTICO.ActicoServer} to build the request sent to <b>Actico Server</b>.
      */
     public Request(){}
 
@@ -84,7 +84,6 @@ public class Request {
     }
 
     /**
-     * @deprecated - used to troubleshoot
      * @return a standard toString()
      */
     @Override

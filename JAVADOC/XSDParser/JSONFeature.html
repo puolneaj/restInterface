@@ -48,11 +48,11 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../XSDParser/ActicoServer.html" title="class in XSDParser"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../XSDParser/ServerManager.html" title="class in XSDParser"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../ACTICO/ActicoServer.html" title="class in ACTICO"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../ACTICO/ServerManager.html" title="class in ACTICO"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
-<li><a href="../index.html?XSDParser/JSONFeature.html" target="_top">Frames</a></li>
+<li><a href="../index.html?ACTICO/JSONFeature.html" target="_top">Frames</a></li>
 <li><a href="JSONFeature.html" target="_top">No&nbsp;Frames</a></li>
 </ul>
 <ul class="navList" id="allclasses_navbar_top">
@@ -91,7 +91,7 @@ var activeTableTab = "activeTableTab";
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">XSDParser</div>
+<div class="subTitle">ACTICO</div>
 <h2 title="Class JSONFeature" class="title">Class JSONFeature</h2>
 </div>
 <div class="contentContainer">
@@ -99,7 +99,7 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>XSDParser.JSONFeature</li>
+<li>ACTICO.JSONFeature</li>
 </ul>
 </li>
 </ul>
@@ -128,7 +128,7 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../XSDParser/JSONFeature.html#JSONFeature--">JSONFeature</a></span>()</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../ACTICO/JSONFeature.html#JSONFeature--">JSONFeature</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -147,21 +147,21 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static <a href="../Model/Output.html" title="class in Model">Output</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../XSDParser/JSONFeature.html#buildResponseObject-java.lang.StringBuffer-">buildResponseObject</a></span>(java.lang.StringBuffer&nbsp;response)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../ACTICO/JSONFeature.html#buildResponseObject-java.lang.StringBuffer-">buildResponseObject</a></span>(java.lang.StringBuffer&nbsp;response)</code>
 <div class="block"><b>Specific Method</b><br>
   Build the <a href="../Model/Output.html" title="class in Model"><code>Output</code></a>.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static java.lang.StringBuffer</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../XSDParser/JSONFeature.html#readJSONResponse-java.net.HttpURLConnection-">readJSONResponse</a></span>(java.net.HttpURLConnection&nbsp;con)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../ACTICO/JSONFeature.html#readJSONResponse-java.net.HttpURLConnection-">readJSONResponse</a></span>(java.net.HttpURLConnection&nbsp;con)</code>
 <div class="block"><b>Generic Method</b><br>
  Read data from a source using Bufferedreader.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../XSDParser/JSONFeature.html#writeRequest-java.net.HttpURLConnection-Model.Request-">writeRequest</a></span>(java.net.HttpURLConnection&nbsp;con,
+<td class="colLast"><code><span class="memberNameLink"><a href="../ACTICO/JSONFeature.html#writeRequest-java.net.HttpURLConnection-Model.Request-">writeRequest</a></span>(java.net.HttpURLConnection&nbsp;con,
             <a href="../Model/Request.html" title="class in Model">Request</a>&nbsp;request)</code>
 <div class="block"><b>Specific Method</b><br>
   Write and send a request.</div>
@@ -221,8 +221,8 @@ extends java.lang.Object</pre>
  The BufferReader insert the whole content of the connection inside a string of type <B>StringBuilder</B>.<br>
  The reading process stops at the end of the file.
 
- <p>Method <a href="../XSDParser/JSONFeature.html#writeRequest-java.net.HttpURLConnection-Model.Request-"><code>writeRequest</code></a> precedes this method.<br>
- Method <a href="../XSDParser/JSONFeature.html#buildResponseObject-java.lang.StringBuffer-"><code>buildResponseObject</code></a> precedes this method.</p>
+ <p>Method <a href="../ACTICO/JSONFeature.html#writeRequest-java.net.HttpURLConnection-Model.Request-"><code>writeRequest</code></a> precedes this method.<br>
+ Method <a href="../ACTICO/JSONFeature.html#buildResponseObject-java.lang.StringBuffer-"><code>buildResponseObject</code></a> precedes this method.</p>
 
  <p>Note: The connection HTTP in the parameter is already open.</p></div>
 <dl>
@@ -250,8 +250,8 @@ extends java.lang.Object</pre>
      <li>Insert the response of Actico into <a href="../Model/Output.html" title="class in Model"><code>Output</code></a> using the method <b>fromJson</b></li>
  </ul>
 
- <p>Method <a href="../XSDParser/JSONFeature.html#readJSONResponse-java.net.HttpURLConnection-"><code>readJSONResponse</code></a> precedes this method.<br>
-  This Method is the last method embedded in  <a href="../XSDParser/ActicoInterface.html#getResponse-Model.Request-"><code>ActicoInterface#getResponse</code></a>.</p></div>
+ <p>Method <a href="../ACTICO/JSONFeature.html#readJSONResponse-java.net.HttpURLConnection-"><code>readJSONResponse</code></a> precedes this method.<br>
+  This Method is the last method embedded in  <a href="../ACTICO/ActicoInterface.html#getResponse-Model.Request-"><code>ActicoInterface#getResponse</code></a>.</p></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>response</code> - string with the content of the JSON response</dd>
@@ -276,8 +276,8 @@ extends java.lang.Object</pre>
       <li>Open a connection for writing</li>
   </ul>
 
- <p>Method <a href="../XSDParser/ServerManager.html#launchServer--"><code>launchServer</code></a> precedes this method.<br>
-  Method <a href="../XSDParser/JSONFeature.html#readJSONResponse-java.net.HttpURLConnection-"><code>readJSONResponse</code></a> precedes this method.</p>
+ <p>Method <a href="../ACTICO/ServerManager.html#launchServer--"><code>launchServer</code></a> precedes this method.<br>
+  Method <a href="../ACTICO/JSONFeature.html#readJSONResponse-java.net.HttpURLConnection-"><code>readJSONResponse</code></a> precedes this method.</p>
 
   <p>Note: the HTTP connection is open at his stage of the process</p></div>
 <dl>
@@ -314,11 +314,11 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../XSDParser/ActicoServer.html" title="class in XSDParser"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../XSDParser/ServerManager.html" title="class in XSDParser"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../ACTICO/ActicoServer.html" title="class in ACTICO"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../ACTICO/ServerManager.html" title="class in ACTICO"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
-<li><a href="../index.html?XSDParser/JSONFeature.html" target="_top">Frames</a></li>
+<li><a href="../index.html?ACTICO/JSONFeature.html" target="_top">Frames</a></li>
 <li><a href="JSONFeature.html" target="_top">No&nbsp;Frames</a></li>
 </ul>
 <ul class="navList" id="allclasses_navbar_bottom">

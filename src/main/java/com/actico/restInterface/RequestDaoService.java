@@ -2,7 +2,7 @@ package com.actico.restInterface;
 
 import Model.Output;
 import Model.Request;
-import XSDParser.ActicoInterface;
+import ACTICO.ActicoInterface;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.ArrayList;

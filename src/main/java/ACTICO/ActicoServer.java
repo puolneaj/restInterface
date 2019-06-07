@@ -1,4 +1,4 @@
-package XSDParser;
+package ACTICO;
 
 import Model.*;
 import com.google.gson.Gson;
@@ -12,17 +12,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
- * Focus on the connection point with <b>Actico Server</b>, i.e. localhost:8087.
+ * Focus on the connection point with <b>Actico Server</b>, i.e localhost:8087.
  *
  */
 public class ActicoServer {
     /**
-     * Call the method <b>getXMLResponse()</b>.
+     * Call the method <b>getJSONResponse()</b>.
      * <ul>
-     * <li>read an XML file.</li>
-     * <li>send the Request in XML format.</li>
-     * <li>read and parse the XML response from Actico Server.</li>
-     * <li>insert the XML nodes attributes into Output object.</li>
+     * <li>read an JSON file.</li>
+     * <li>send the Request in JSON format.</li>
+     * <li>insert the JSON response nodes attributes into Output object.</li>
      * </ul>
      *
      * @param args argument not in use
