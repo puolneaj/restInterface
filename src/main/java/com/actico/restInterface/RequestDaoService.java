@@ -97,7 +97,7 @@ public class RequestDaoService {
      * Trigger a response for a given {@link Request}.<br>
      *     Link the localhost:8080 to localhost:8087.
      * <p>Method is called in the class {@link RequestResource}.<br>
-     * Call Actico Execution Server via class {@link ActicoInterface} in the piece of code :<br>
+     * Call Actico Execution Server via class {@link ActicoInterface} in the piece of code:<br>
      * <pre>{@code Output output = ActicoInterface.getResponse(input);}</pre><br>
      * Add the output to the list '<b>outputs</b>.
      * @param request {@link Request}

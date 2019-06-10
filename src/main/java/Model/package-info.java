@@ -1,5 +1,5 @@
 /**
- * Repository of the objects of the projects.
+ * Repository of the objects of the project.
  *
  * <p>Avoid repeating the same work multiple times within the project. Encapsulate the objects in use in the classes {@link ACTICO.ActicoInterface ActicoInterface} and
  * {@link ACTICO.JSONFeature JSONFeature}. Allow hierarchical structure in the objects<br>
