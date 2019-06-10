@@ -7,7 +7,7 @@
  *
  * <p>The set of methods embedded in {@link ACTICO.ActicoInterface#getResponse(Model.Request) ActicoInterface#getResponse} triggers Actico Execution Server.<br>
  * It mimics the action of Postman (or SoapUI) when calling the Execution Server with (1) a request body containing the {@link Model.Request}<br>
- * and a (2) a header with the media type (e.g. application/XML or application/JSON) and the authentication.</p>
+ * and (2) a header with the media type (e.g. application/XML or application/JSON) and the authentication.</p>
  *
  */
 package ACTICO;

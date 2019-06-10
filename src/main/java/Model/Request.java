@@ -63,7 +63,7 @@ public class Request {
     }
 
     /**
-     * Constructor used in {@link ACTICO.ActicoServer} to build the request sent to <b>Actico Server</b>.
+     * Constructor used in {@link ACTICO.ActicoInterface} to build the request sent to <b>Actico Server</b>.
      */
     public Request(){}
 

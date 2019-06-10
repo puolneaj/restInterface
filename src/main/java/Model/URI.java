@@ -3,7 +3,7 @@ package Model;
 import ACTICO.ActicoInterface;
 
 /**
- * Model URI which feeds the classes {@link ACTICO.ActicoServer} and {@link ActicoInterface}
+ * Model URI which feeds the class {@link ActicoInterface}
  */
 public class URI {
 
