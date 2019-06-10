@@ -31,6 +31,7 @@ public class ServerManager {
      *     <li>encode the request body</li>
      * </ul>
      * @return the HTTP connection to the <b>.wadl</b> file on ACTICO Execution Server.
+     * @throws IOException if I/O operations fail or interrupt.
      */
     public static HttpURLConnection launchServer() throws IOException {
         //TODO Get all configuration data from .properties file

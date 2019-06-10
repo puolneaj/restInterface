@@ -15,8 +15,9 @@ public class ActicoInterface {
      *
      * <p>Print the output generated.</p>
      * @param args argument not required.
+     * @throws IOException if I/O operations fail or interrupt.
      */
-    public static void main(String args[]) throws IOException {
+     public static void main(String args[]) throws IOException {
 
         Request request = new Request();
 
@@ -45,6 +46,7 @@ public class ActicoInterface {
      *
      * @param request the model on which the JSON file request is based upon
      * @return the output model on which the JSON file response is based upon
+     * @throws IOException if I/O operations fail or interrupt.
      */
     public static Output getResponse(Request request) throws IOException {
         HttpURLConnection con =ServerManager.launchServer();

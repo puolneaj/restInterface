@@ -102,6 +102,7 @@ public class RequestDaoService {
      * Add the output to the list '<b>outputs</b>.
      * @param request {@link Request}
      * @return {@link Output}
+     * @throws IOException if I/O operations fail or interrupt
      */
     public Output acticoResponse(Request request) throws IOException {
         Output output = ActicoInterface.getResponse(request);

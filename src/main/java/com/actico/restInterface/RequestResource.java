@@ -49,9 +49,9 @@ public class RequestResource {
      * <p><b>@PathVariable annotation</b> handles dynamic URIs where one or more of the URI value works as a parameter.</p>
      *
      * @throws RequestNotFoundException if the request is null.
-     *
+     * @param id the identification number of the request.
      * @return a specific request in JSON format using the method <b>findOne()</b>
-     * from the class {@link RequestDaoService}
+     * from the class {@link RequestDaoService}.
      */
     @GetMapping(path = "/requests/{id}")
     public Request retrieveRequest(@PathVariable String id) {
@@ -77,7 +77,7 @@ public class RequestResource {
      *                 .fromCurrentRequest()
      *                 .path("/{id}")
      *                 .buildAndExpand(savedRequest.getDocId()).toUri();}</pre>
-     *
+     * @param request represents the object {@link Request}.
      * @return a ResponseEntity, e.g. represents the whole HTTP response: status code, headers, and body. The method
       * builds the object (JSON format) at a given location.
      */
@@ -128,6 +128,7 @@ public class RequestResource {
      * @param request is the object is fed to Actico Server
      * @return a ResponseEntity, e.g. represents the whole HTTP response: status code, headers, and body. The method
      * builds the object (JSON format) at a given location.
+     * @throws IOException if I/O operations fail or interrupt
      */
     @PostMapping(path = "/responses")
     public ResponseEntity<Object> triggerExecutionServer(@RequestBody Request request)
@@ -166,16 +167,16 @@ public class RequestResource {
      * It is a composed annotation that acts as a shortcut for @RequestMapping(method = RequestMethod.GET).
      * <b>@PathVariable annotation</b> handles dynamic URIs where one or more of the URI value works as a parameter.</p>
      *
-     * @throws RequestNotFoundException if the output (i.e. response) from ACTICO is null.
-     *
+     * @param id the identification number of the request.
      * @return a specific request in JSON format using the method <b>findOneResponse(id)</b>
      * from the class {@link RequestDaoService}
+     * @throws RequestNotFoundException if the output (i.e. response) from ACTICO is null.
      */
     @GetMapping(path = "/responses/{id}")
     public Output retrieveResponse(@PathVariable String id) {
         Output output = service.findOneResponse(id);
         if (output == null) {
-            throw new RequestNotFoundException("id-" + id);
+            throw new RequestNotFoundException("id - " + id);
         }
         return output;
     }
