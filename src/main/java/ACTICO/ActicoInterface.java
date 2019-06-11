@@ -1,4 +1,4 @@
-package XSDParser;
+package ACTICO;
 
 import javax.xml.transform.TransformerConfigurationException;
 import Model.*;

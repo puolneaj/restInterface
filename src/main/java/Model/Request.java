@@ -1,6 +1,6 @@
 package Model;
 
-import XSDParser.ActicoInterface;
+import ACTICO.ActicoInterface;
 
 /**
  * Structure of the request embedded in {@link Input}
@@ -61,11 +61,6 @@ public class Request {
     public void setTelPriv(String telPriv) {
         this.telPriv = telPriv;
     }
-
-    /**
-     * Constructor used in {@link XSDParser.ActicoServer} to build the request sent to <b>Actico Server</b>.
-     */
-    public Request(){}
 
     /**
      * Constructor used in {@link ActicoInterface} to build the hardcoded request sent to <b>Actico Server</b>.

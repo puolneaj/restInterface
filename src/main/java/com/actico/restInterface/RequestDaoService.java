@@ -3,7 +3,7 @@ package com.actico.restInterface;
 import Model.Input;
 import Model.Output;
 import Model.Request;
-import XSDParser.ActicoInterface;
+import ACTICO.ActicoInterface;
 import org.springframework.stereotype.Component;
 
 import javax.xml.transform.TransformerConfigurationException;
