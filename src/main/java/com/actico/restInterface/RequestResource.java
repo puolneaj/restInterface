@@ -3,6 +3,7 @@ package com.actico.restInterface;
 import Model.Output;
 import Model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -131,7 +132,7 @@ public class RequestResource {
      * builds the object (JSON format) at a given location.
      * @throws TransformerConfigurationException if serious configuration error.
      */
-    @PostMapping(path = "/responses")
+    @PostMapping(path = "/responses", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Object> triggerExecutionServer(@RequestBody Request request)
             throws TransformerConfigurationException {
         Output output = service.acticoResponse(request);
