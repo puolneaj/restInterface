@@ -72,7 +72,7 @@
         The documentation provides high level information on the different parts of the project but also gives an insight
         on the structure of the methods and classes of the packages.</p>
     <p>A short description of the actual state of the project as well as the description of the packages are given below.
-    The details of the packages is given in great details in the section below, <b>Packages</b>.</p>
+        The details of the packages is given in great details in the section below, <b>Packages</b>.</p>
 </ul>
 
 <!-- ========= END OF TOP NAVBAR ========= -->
@@ -128,8 +128,8 @@
             Note that Actico Execution Server offers HTTP endpoints that can be used to pick the business rules model.</li>
     </ol>
 
-    <p>In this project, the connection will take place at Actico Execution Server : on the server, the Business Rules models are accessed
-        and are represented by their inputs and outputs through .wadl representation. <br> The models are called from an external system, i.e. ACP here.
+    <p>In this project the connection will take place at Actico Execution Server : on the server the Business Rules models are accessed
+        and are represented by their inputs and outputs.<br> Through .wadl representation, the models are called from an external system, i.e. ACP here.
         The external system picks the appropriate repository and populates the input fields.<br>
         Note that Actico Execution Server is a passive repository and doesn’t handle the sending of messages out of the server.
         It allows SOAP and REST calls from external system using the XML or JSON formats.<br>
@@ -139,19 +139,19 @@
     <p>The Execution Server runs the model with the inputs given by the external system, i.e. Avaloq Core Platform.</p>
 
     <p>Actico can implement a Java Messaging Service (JMS) which is dealing with the transmission of the message.
-        It would be an additional JAVA project which would send this call. At this point, JMS is not part of the project yet.</p>
+        It would be an additional JAVA project which would send this call. At this point, JMS is not part of the project yet.<p></p>
 </ul><br>
 
 <h1>Packages Description</h1>
 <ul>Package represents pillars of the project, they separate the different parts of the project in order to ease the readability
     and reusability of the code.
-    <li><h2>Model</h2>
+    <li><h3>Model</h3>
         Repository of the objects of the project.
         <p>Avoid repeating the same work multiple times within the project. Encapsulate the objects in use in the classes ActicoInterface and
             JSONFeature. Allow hierarchical structure in the objects.<br>
             Define the level of security regarding the access and and override of the object attributes.</p>
         Note: Follow OOP concept.</li>
-    <li><h2>ACTICO</h2>
+    <li><h3>ACTICO</h3>
         Deal with the connection with ACTICO Servers, sending and receiving information.
         <p>Actico Execution Server is a runtime repository with a collection of business rules/DMN. Using .wadl file, the business rules
             are triggered with a specific input and send back an output - the input and output follow the specifications of .wadl file.
@@ -160,7 +160,7 @@
             It mimics the action of Postman (or SoapUI) when calling the Execution Server with (1) a request body containing the Model.Request
             and (2) a header with the media type (e.g. application/XML or application/JSON) and the authentication.</p>
     </li>
-    <li><h2>REST Interface</h2>
+    <li><h3>REST Interface</h3>
         Build the RESTful interface.<br>
         <p>The set of classes implements a REST architecture which communicates wih Actico Server.<br>
             Actico Server - located on localhost:8087 - is dedicated to the execution of business rules.
