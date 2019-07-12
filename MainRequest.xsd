@@ -13,7 +13,7 @@
   <element name="input">
     <complexType>
       <sequence>
-        <element nillable="true" name="Request" type="bprequest:Request"/>
+        <element nillable="true" name="request" type="bprequest:Request"/>
       </sequence>
     </complexType>
   </element>

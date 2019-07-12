@@ -54,8 +54,8 @@ public class ServerManager {
             con.setRequestProperty("Authorization", "Basic " +
                     encodedAuthorization);
             //set the body of the request
-            //con.setRequestProperty("Content-Type", "application/xml; charset=utf-8");
-            con.setRequestMethod("accept:application/xml");
+            con.setRequestProperty("Content-Type", "application/xml; charset=utf-8");
+//            con.setRequestMethod("accept:application/xml");
             con.setRequestProperty("Expect", "100-continue");
 
         } catch (IOException e) {

@@ -123,21 +123,21 @@ public class XMLFeature {
 
         Document document = XMLFeature.buildDocumentFromString(stringWriter);
 
-        NodeList nodeList = document.getElementsByTagName("ns:Request");
+        NodeList nodeList = document.getElementsByTagName("ns:request");
 
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element elem = (Element) nodeList.item(i);
-            Node nodeName = elem.getElementsByTagName("ns1:name").item(0).getFirstChild();
-            Node nodeId = elem.getElementsByTagName("ns1:docId").item(0).getFirstChild();
-            Node nodeCode = elem.getElementsByTagName("ns1:code").item(0).getFirstChild();
-            Node nodeTel = elem.getElementsByTagName("ns1:telPriv").item(0).getFirstChild();
-            Node nodeMobile = elem.getElementsByTagName("ns1:mobilePriv").item(0).getFirstChild();
+            Node nodeDocId = elem.getElementsByTagName("ns1:docId").item(0).getFirstChild();
+            Node nodeProductCategory = elem.getElementsByTagName("ns1:ProductCategory").item(0).getFirstChild();
+            Node nodeClient = elem.getElementsByTagName("ns1:Client").item(0).getFirstChild();
+            Node nodeDomicile = elem.getElementsByTagName("ns1:Domicile").item(0).getFirstChild();
+            Node nodeTradePlace = elem.getElementsByTagName("ns1:TradePlace").item(0).getFirstChild();
 
-            nodeName.setNodeValue(input.getRequest().getName());
-            nodeId.setNodeValue(input.getRequest().getDocId());
-            nodeCode.setNodeValue(input.getRequest().getCode());
-            nodeTel.setNodeValue(input.getRequest().getTelPriv());
-            nodeMobile.setNodeValue(input.getRequest().getMobilePriv());
+            nodeDocId.setNodeValue(input.getRequest().getDocId());
+            nodeProductCategory.setNodeValue(input.getRequest().getProductCategory());
+            nodeClient.setNodeValue(input.getRequest().getClient());
+            nodeDomicile.setNodeValue(input.getRequest().getDomicile());
+            nodeTradePlace.setNodeValue(input.getRequest().getTradePlace());
         }
         return document;
     }

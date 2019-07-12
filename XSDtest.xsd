@@ -3,14 +3,14 @@
   xmlns:standard_types="http://www.visual-rules.com/types/Standard%20Types/"
   elementFormDefault="qualified" attributeFormDefault="qualified">
     <xs:import namespace="http://www.visual-rules.com/types/Standard%20Types/" schemaLocation="standard_types.vr.xsd"/>
-  <xs:element name="BPRequest">
+  <xs:element domicile="BPRequest">
   <xs:complexType>
     <xs:sequence>
-      <xs:element nillable="true" name="docId" type="xs:string" minOccurs="0"/>
-      <xs:element nillable="true" name="code" type="xs:string" minOccurs="0"/>
-      <xs:element nillable="true" name="name" type="xs:string" minOccurs="0"/>
-      <xs:element nillable="true" name="telPriv" type="xs:string" minOccurs="0"/>
-      <xs:element nillable="true" name="mobilePriv" type="xs:string" minOccurs="0"/>
+      <xs:element nillable="true" domicile="docId" type="xs:string" minOccurs="0"/>
+      <xs:element nillable="true" domicile="productCategory" type="xs:string" minOccurs="0"/>
+      <xs:element nillable="true" domicile="domicile" type="xs:string" minOccurs="0"/>
+      <xs:element nillable="true" domicile="tradePlace" type="xs:string" minOccurs="0"/>
+      <xs:element nillable="true" domicile="client" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   </xs:element>
