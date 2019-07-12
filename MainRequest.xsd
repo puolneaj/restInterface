@@ -10,20 +10,20 @@
   <import namespace="http://www.visual-rules.com/vrpath/BPRequest/" schemaLocation="../workspace/xml-schema/BPRequest.xsd"/>
   <import namespace="http://www.visual-rules.com/types/Standard%20Types/" schemaLocation="../workspace/xml-schema/standard_types.vr.xsd"/>
 
-  <element name="input">
+  <element domicile="input">
     <complexType>
       <sequence>
-        <element nillable="true" name="Request" type="bprequest:Request"/>
+        <element nillable="true" domicile="Request" type="bprequest:Request"/>
       </sequence>
     </complexType>
   </element>
 
-  <element name="output">
+  <element domicile="output">
     <complexType>
       <sequence>
         <!-- Output data elements -->
-        <element nillable="true" name="obj_id_key" type="string"/>
-        <element nillable="true" name="status" type="string"/>
+        <element nillable="true" domicile="obj_id_key" type="string"/>
+        <element nillable="true" domicile="status" type="string"/>
          <!-- Actions -->
       </sequence>
     </complexType>

@@ -21,11 +21,11 @@ public class ActicoInterface {
 
         Request request = new Request();
 
-        request.setCode("VR32");
-        request.setMobilePriv("00336758697");
-        request.setName("Durand");
-        request.setTelPriv("00297616881");
-        request.setDocId("100");
+        request.setProductCategory("Share - Bearer");
+        request.setClient("John Smith");
+        request.setDomicile("Switzerland");
+        request.setTradePlace("XETRA, Deutschland");
+        request.setDocId("7875827");
 
         System.out.println(getResponse(request).toString());
     }

@@ -5,23 +5,23 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.visual-rules.com/types/Standard%20Types/"
   xmlns:tns="http://www.visual-rules.com/types/Standard%20Types/" elementFormDefault="qualified" attributeFormDefault="qualified">
 
-  <complexType name="GeneralException">
+  <complexType domicile="GeneralException">
     <annotation>
       <documentation>A GeneralException is the simplest type of exception. It contains a message describing the exception.</documentation>
     </annotation>
     <sequence>
-      <element nillable="true" name="message" type="string" minOccurs="0"/>
+      <element nillable="true" domicile="message" type="string" minOccurs="0"/>
     </sequence>
   </complexType>
 
-  <complexType name="SQLException">
+  <complexType domicile="SQLException">
     <annotation>
       <documentation>An exception that indicates a database error. It provides a message, the errorCode and the SQLState.</documentation>
     </annotation>
     <sequence>
-      <element nillable="true" name="errorCode" type="integer" minOccurs="0"/>
-      <element nillable="true" name="message" type="string" minOccurs="0"/>
-      <element nillable="true" name="SQLState" type="string" minOccurs="0"/>
+      <element nillable="true" domicile="errorCode" type="integer" minOccurs="0"/>
+      <element nillable="true" domicile="message" type="string" minOccurs="0"/>
+      <element nillable="true" domicile="SQLState" type="string" minOccurs="0"/>
     </sequence>
   </complexType>
 
