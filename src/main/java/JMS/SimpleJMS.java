@@ -47,6 +47,31 @@ public class SimpleJMS {
         }
     }
 
+    public void SrunProducer(String XML) throws Exception {
+        TextMessage message;
+        MessageProducer producer = session.createProducer(destination);
+        try {
+            message = session.createTextMessage();
+            message.setText(XML);
+            producer.send(message);
+        } finally {
+            producer.close();
+        }
+    }
+
+    public String SrunConsumer() throws Exception{
+        String text="";
+        MessageConsumer consumer = session.createConsumer(destination);
+        try {
+            TextMessage message = (TextMessage) consumer.receive();
+            text=message.getText();
+            System.out.println(text);
+        } finally {
+            consumer.close();
+        }
+        return text;
+    }
+
     public static void main(String[] args) {
         SimpleJMS example = new SimpleJMS();
         System.out.print("\n\n\n");

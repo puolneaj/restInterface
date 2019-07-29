@@ -1,4 +1,5 @@
 package ACTICO;
+import JMS.SimpleJMS;
 
 import javax.xml.transform.TransformerConfigurationException;
 import Model.*;
@@ -25,19 +26,42 @@ public class ActicoInterface {
      * @throws TransformerConfigurationException
      */
     public static void main(String args[]) throws TransformerConfigurationException {
+        String XML="<input xmlns=\"http://www.visual-rules.com/vrpath/BPRequest/MainRequest/\" xmlns:ns1=\"http://www.visual-rules.com/vrpath/BPRequest/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"> <request> <docId>6</docId> <ProductCategory>Share - Bearer</ProductCategory> <Client>Johm Smith</Client> <Domicile>Switzerland</Domicile> <TradePlace>XETRA, Deutschland</TradePlace> </request> </input>";
+        String JMSrequest="";
+        SimpleJMS requestExample = new SimpleJMS();
+        System.out.print("\n\n\n");
+        System.out.println("Starting Actico SimpleJMS requestExample now...\n");
+        try {
+            requestExample.before();
+            requestExample.SrunProducer(XML);
+            JMSrequest=requestExample.SrunConsumer();
+            requestExample.after();
+        } catch (Exception e) {
+            System.out.println("Caught an exception during the requestExample: " + e.getMessage());
+        }
+        System.out.println("\nFinished running the Actico SimpleJMS requestExample.");
+        System.out.print("\n\n\n");
 
-        Request request = new Request();
-        Input input = new Input();
+        HttpURLConnection con = ServerManager.launchServer();
+        XMLFeature.sendXMLRequest(con, JMSrequest);
+        StringBuilder response = XMLFeature.readXMLResponse(con);
+        System.out.println("\n - - - - - -  RECEIVE XML FROM ACTICO EXE SERVER - - - - \n"+response);
 
-        request.setProductCategory("VR32");
-        request.setClient("00336758697");
-        request.setDomicile("Durand");
-        request.setTradePlace("00297616881");
-        request.setDocId("100");
 
-        input.setRequest(request);
+        // ------- CALL JMS WITH RESPONSE FROM ACTICO SERVER -----------
+        SimpleJMS responseExample = new SimpleJMS();
+        System.out.print("\n\n\n");
+        System.out.println("Starting Actico SimpleJMS responseExample now...\n");
+        try {
+            responseExample.before();
+            responseExample.SrunProducer(response.toString());
+            responseExample.after();
+        } catch (Exception e) {
+            System.out.println("Caught an exception during the responseExample: " + e.getMessage());
+        }
+        System.out.println("\nFinished running the Actico SimpleJMS responseExample.");
+        System.out.print("\n\n\n");
 
-        System.out.println(getResponse(input).toString());
     }
 
     /**
