@@ -20,6 +20,13 @@ dependencies {
 	compile group: 'in.jlibs', name: 'jlibs-xml', version: '2.2.1'
 	// https://mvnrepository.com/artifact/in.jlibs/jlibs-xsd
 	compile group: 'in.jlibs', name: 'jlibs-xsd', version: '2.1'
+	// https://mvnrepository.com/artifact/javax.jms/javax.jms-api
+	compile group: 'javax.jms', name: 'javax.jms-api', version: '2.0.1'
+	// https://mvnrepository.com/artifact/org.apache.activemq/activemq-core
+	compile group: 'org.apache.activemq', name: 'activemq-core', version: '5.7.0'
+
+
+
 
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
