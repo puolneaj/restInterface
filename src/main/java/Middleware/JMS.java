@@ -4,12 +4,13 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 import javax.jms.*;
 
 /**
- * handle the message between ActiveMQ and Actico servers.
+ * Handle the message between ActiveMQ and Actico servers.
  *
  */
 public class JMS {
 
-    private final String connectionUri = "tcp://localhost:61616";
+//    private final String connectionUri = "tcp://localhost:61616";
+    private final String connectionUri = "tcp://172.26.161.170:61616";
     private ActiveMQConnectionFactory connectionFactory;
     private Connection connection;
     private Session session;
@@ -18,7 +19,7 @@ public class JMS {
     /**
      * Establish connection to ActiveMQ port (i.e. port 61616).
      *
-     * Create and start connection to the URI tcp://localhost:61616. Create a queue Trade.Work.
+     * Create and start connection to the URI tcp://localhost:61616. Create a queue <i>Trade.Work</i>.
      * @throws Exception when any generic issue comes up.
      */
     public void establishConnection() throws Exception {
@@ -26,7 +27,9 @@ public class JMS {
         connection = connectionFactory.createConnection();
         connection.start();
         session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-        destination = session.createQueue("TRADEQ.Work");
+//        destination = session.createQueue("TRADEQ.Work");
+        destination = session.createQueue("avq_out");
+
     }
 
     /**
@@ -42,8 +45,8 @@ public class JMS {
     /**
      * Produce and consume a XML message.
      *
-     * Create a producer attached to the queue TRADEQ.Work, then a message with text in the body and send it. Close the procucer.<br>
-     * Create a consumer and get the message from the queue TRADEQ.Work. Print the message and close the consumer.
+     * Create a producer attached to the queue <i>TRADEQ.Work</i>, then a message with text in the body and send it. Close the procucer.<br>
+     * Create a consumer and get the message from the queue <i>TRADEQ.Work</i>. Print the message and close the consumer.
      *
      * @throws Exception when any generic issue comes up.
      */
@@ -92,7 +95,7 @@ public class JMS {
      *
      * Create a consumer for a specific queue. Retrieve the message body and return it. Also print it for debugging purpose.
      * @return body of the message in text format.
-     * @throws Exception
+     * @throws Exception when any generic issue comes up.
      */
     public String consumeMessage() throws Exception{
         String text="";
