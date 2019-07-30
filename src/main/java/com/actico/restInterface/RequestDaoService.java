@@ -3,7 +3,7 @@ package com.actico.restInterface;
 import Model.Input;
 import Model.Output;
 import Model.Request;
-import XSDParser.ActicoInterface;
+import ACTICO.ActicoInterface;
 import org.springframework.stereotype.Component;
 
 import javax.xml.transform.TransformerConfigurationException;
@@ -54,8 +54,8 @@ public class RequestDaoService {
      * @return request once it has been added to the list requests.
      */
     public Request save(Request request) {
-        if (request.getObj_id() == null) {
-            request.setObj_id(String.valueOf(++requestsCount));
+        if (request.getDocId() == null) {
+            request.setDocId(String.valueOf(++requestsCount));
         }
         requests.add(request);
         return request;
@@ -70,7 +70,7 @@ public class RequestDaoService {
      */
     public Request findOne(String id) {
         for (Request request : requests) {
-            if (request.getObj_id().equals(id)) {
+            if (request.getDocId().equals(id)) {
                 return request;
             }
         }
@@ -87,7 +87,7 @@ public class RequestDaoService {
         Iterator<Request> iterator = requests.iterator();
         while (iterator.hasNext()) {
             Request request = iterator.next();
-            if (request.getObj_id().equals(id)) {
+            if (request.getDocId().equals(id)) {
                 iterator.remove();
                 return request;
             }
@@ -133,7 +133,7 @@ public class RequestDaoService {
      */
     public Output findOneResponse(String id) {
         for (Output output : outputs) {
-            if (output.getObj_id_key().equals(id)) {
+            if (output.getKey().equals(id)) {
                 return output;
             }
         }
@@ -151,7 +151,7 @@ public class RequestDaoService {
         Iterator<Output> iterator = outputs.iterator();
         while (iterator.hasNext()) {
             Output output = iterator.next();
-            if (output.getObj_id_key().equals(id)) {
+            if (output.getKey().equals(id)) {
                 iterator.remove();
                 return output;
             }

@@ -3,6 +3,7 @@ package com.actico.restInterface;
 import Model.Output;
 import Model.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -77,7 +78,7 @@ public class RequestResource {
      * <pre>{@code URI location = ServletUriComponentsBuilder
      *                 .fromCurrentRequest()
      *                 .path("/{id}")
-     *                 .buildAndExpand(savedRequest.getObj_id()).toUri();}</pre>
+     *                 .buildAndExpand(savedRequest.getDocId()).toUri();}</pre>
      *
      * @return a ResponseEntity, e.g. represents the whole HTTP response: status code, headers, and body. The method
       * builds the object (JSON format) at a given location.
@@ -88,7 +89,7 @@ public class RequestResource {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(savedRequest.getObj_id()).toUri();
+                .buildAndExpand(savedRequest.getDocId()).toUri();
         return ResponseEntity.created(location).build();
     }
 
@@ -125,20 +126,20 @@ public class RequestResource {
      * <pre>{@code URI location = ServletUriComponentsBuilder
      *                 .fromCurrentRequest()
      *                  .path("/{id}")
-     *               .buildAndExpand(savedRequest.getObj_id()).toUri();}</pre>
+     *               .buildAndExpand(savedRequest.getDocId()).toUri();}</pre>
      * @param request is the object is fed to Actico Server
      * @return a ResponseEntity, e.g. represents the whole HTTP response: status code, headers, and body. The method
      * builds the object (JSON format) at a given location.
      * @throws TransformerConfigurationException if serious configuration error.
      */
-    @PostMapping(path = "/requestsACTICO")
+    @PostMapping(path = "/responses", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Object> triggerExecutionServer(@RequestBody Request request)
             throws TransformerConfigurationException {
         Output output = service.acticoResponse(request);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(output.getObj_id_key()).toUri();
+                .buildAndExpand(output.getKey()).toUri();
 
         return ResponseEntity.created(location).build();
     }
@@ -156,7 +157,7 @@ public class RequestResource {
      * @return a list of all the answers in JSON format using the method <b>findAllResponses()</b>
      * from the class {@link RequestDaoService}. The results are in the shape of 'Output' objects.
      */
-    @GetMapping(path = "/requestsACTICO")
+    @GetMapping(path = "/responses")
     public List<Output> retrieveAllACTICOResponses() {
         return service.findAllResponses();
     }
@@ -173,7 +174,7 @@ public class RequestResource {
      * @return a specific request in JSON format using the method <b>findOneResponse(id)</b>
      * from the class {@link RequestDaoService}
      */
-    @GetMapping(path = "/requestsACTICO/{id}")
+    @GetMapping(path = "/responses/{id}")
     public Output retrieveResponse(@PathVariable String id) {
         Output output = service.findOneResponse(id);
         if (output == null) {
@@ -192,7 +193,7 @@ public class RequestResource {
      * @throws RequestNotFoundException if request is null
      * @param id corresponds to the identifier of 'Request' object.
      */
-    @DeleteMapping(path = "/requestsACTICO/{id}")
+    @DeleteMapping(path = "/responses/{id}")
     public @ResponseBody
     void removeResponse(@PathVariable String id) {
         Output output = service.deleteResponseById(id);

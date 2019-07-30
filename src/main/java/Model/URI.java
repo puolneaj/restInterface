@@ -1,9 +1,9 @@
 package Model;
 
-import XSDParser.ActicoInterface;
+import ACTICO.ActicoInterface;
 
 /**
- * Model URI which feeds the classes {@link XSDParser.ActicoServer} and {@link ActicoInterface}
+ * Model URI which feeds the classes {@link ActicoInterface}
  */
 public class URI {
 

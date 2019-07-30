@@ -1,86 +1,84 @@
 package Model;
 
-import XSDParser.ActicoInterface;
+import ACTICO.ActicoInterface;
 
 /**
  * Structure of the request embedded in {@link Input}
  */
 public class Request {
 
-    private String obj_id;
+    private String docId;
 
-    private String code;
+    private String ProductCategory;
 
-    private String mobile_priv;
+    private String Client;
 
-    private String name;
+    private String Domicile;
 
-    private String tel_priv;
+    private String TradePlace;
 
-    public String getObj_id() {
-        return obj_id;
+    public Request() {
     }
 
-    //TODO possible decision for attribute name mapping
+    public String getDocId() {
+        return docId;
+    }
+
+    //TODO possible decision for attribute Domicile mapping
 //    public String getObj_idAttributeName() {
-//        return "ns1:name";
+//        return "ns1:Domicile";
 //    }
 
-    public void setObj_id(String obj_id) {
-        this.obj_id = obj_id;
+    public void setDocId(String docId) {
+        this.docId = docId;
     }
 
-    public String getCode() {
-        return code;
+    public String getProductCategory() {
+        return ProductCategory;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setProductCategory(String productCategory) {
+        this.ProductCategory = productCategory;
     }
 
-    public String getMobile_priv() {
-        return mobile_priv;
+    public String getClient() {
+        return Client;
     }
 
-    public void setMobile_priv(String mobile_priv) {
-        this.mobile_priv = mobile_priv;
+    public void setClient(String client) {
+        this.Client = client;
     }
 
-    public String getName() {
-        return name;
+    public String getDomicile() {
+        return Domicile;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDomicile(String domicile) {
+        this.Domicile = domicile;
     }
 
-    public String getTel_priv() {
-        return tel_priv;
+    public String getTradePlace() {
+        return TradePlace;
     }
 
-    public void setTel_priv(String tel_priv) {
-        this.tel_priv = tel_priv;
+    public void setTradePlace(String tradePlace) {
+        this.TradePlace = tradePlace;
     }
-
-    /**
-     * Constructor used in {@link XSDParser.ActicoServer} to build the request sent to <b>Actico Server</b>.
-     */
-    public Request(){}
 
     /**
      * Constructor used in {@link ActicoInterface} to build the hardcoded request sent to <b>Actico Server</b>.
-     * @param obj_id please refer to Model BPRequest in Actico Modeler
-     * @param code please refer to Model BPRequest in Actico Modeler
-     * @param mobile_priv please refer to Model BPRequest in Actico Modeler
-     * @param name please refer to Model BPRequest in Actico Modeler
-     * @param tel_priv please refer to Model BPRequest in Actico Modeler
+     * @param docId please refer to Model BPRequest in Actico Modeler
+     * @param ProductCategory please refer to Model BPRequest in Actico Modeler
+     * @param Client please refer to Model BPRequest in Actico Modeler
+     * @param Domicile please refer to Model BPRequest in Actico Modeler
+     * @param TradePlace please refer to Model BPRequest in Actico Modeler
      */
-    public Request(String obj_id, String code, String mobile_priv, String name, String tel_priv) {
-        this.obj_id = obj_id;
-        this.code = code;
-        this.mobile_priv = mobile_priv;
-        this.name = name;
-        this.tel_priv = tel_priv;
+    public Request(String docId, String ProductCategory, String Client, String Domicile, String TradePlace) {
+        this.docId = docId;
+        this.ProductCategory = ProductCategory;
+        this.Client = Client;
+        this.Domicile = Domicile;
+        this.TradePlace = TradePlace;
     }
 
     /**
@@ -89,6 +87,6 @@ public class Request {
      */
     @Override
     public String toString() {
-        return "ClassPojo [obj_id = " + obj_id + ", code = " + code + ", mobile_priv = " + mobile_priv + ", name = " + name + ", tel_priv = " + tel_priv + "]";
+        return "ClassPojo [docId = " + docId + ", ProductCategory = " + ProductCategory + ", Client = " + Client + ", Domicile = " + Domicile + ", TradePlace = " + TradePlace + "]";
     }
 }

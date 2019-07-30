@@ -1,4 +1,4 @@
-package XSDParser;
+package ACTICO;
 
 import Model.Input;
 import Model.Output;
@@ -123,21 +123,21 @@ public class XMLFeature {
 
         Document document = XMLFeature.buildDocumentFromString(stringWriter);
 
-        NodeList nodeList = document.getElementsByTagName("ns:Request");
+        NodeList nodeList = document.getElementsByTagName("ns:request");
 
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element elem = (Element) nodeList.item(i);
-            Node nodeName = elem.getElementsByTagName("ns1:name").item(0).getFirstChild();
-            Node nodeId = elem.getElementsByTagName("ns1:obj_id").item(0).getFirstChild();
-            Node nodeCode = elem.getElementsByTagName("ns1:code").item(0).getFirstChild();
-            Node nodeTel = elem.getElementsByTagName("ns1:tel_priv").item(0).getFirstChild();
-            Node nodeMobile = elem.getElementsByTagName("ns1:mobile_priv").item(0).getFirstChild();
+            Node nodeDocId = elem.getElementsByTagName("ns1:docId").item(0).getFirstChild();
+            Node nodeProductCategory = elem.getElementsByTagName("ns1:productCategory").item(0).getFirstChild();
+            Node nodeClient = elem.getElementsByTagName("ns1:client").item(0).getFirstChild();
+            Node nodeDomicile = elem.getElementsByTagName("ns1:domicile").item(0).getFirstChild();
+            Node nodeTradePlace = elem.getElementsByTagName("ns1:tradePlace").item(0).getFirstChild();
 
-            nodeName.setNodeValue(input.getRequest().getName());
-            nodeId.setNodeValue(input.getRequest().getObj_id());
-            nodeCode.setNodeValue(input.getRequest().getCode());
-            nodeTel.setNodeValue(input.getRequest().getTel_priv());
-            nodeMobile.setNodeValue(input.getRequest().getMobile_priv());
+            nodeDocId.setNodeValue(input.getRequest().getDocId());
+            nodeProductCategory.setNodeValue(input.getRequest().getProductCategory());
+            nodeClient.setNodeValue(input.getRequest().getClient());
+            nodeDomicile.setNodeValue(input.getRequest().getDomicile());
+            nodeTradePlace.setNodeValue(input.getRequest().getTradePlace());
         }
         return document;
     }
@@ -172,10 +172,10 @@ public class XMLFeature {
 
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element elem = (Element) nodeList.item(i);
-            Node nodeIDKey = elem.getElementsByTagName("obj_id_key").item(0).getFirstChild();
+            Node nodeIDKey = elem.getElementsByTagName("key").item(0).getFirstChild();
             Node nodeStatus = elem.getElementsByTagName("status").item(0).getFirstChild();
 
-            output.setObj_id_key(nodeIDKey.getNodeValue());
+            output.setKey(nodeIDKey.getNodeValue());
             output.setStatus(nodeStatus.getNodeValue());
         }
         return output;

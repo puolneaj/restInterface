@@ -1,4 +1,5 @@
-package XSDParser;
+package ACTICO;
+import Middleware.JMS;
 
 import javax.xml.transform.TransformerConfigurationException;
 import Model.*;
@@ -25,19 +26,41 @@ public class ActicoInterface {
      * @throws TransformerConfigurationException
      */
     public static void main(String args[]) throws TransformerConfigurationException {
+        String XML="<input xmlns=\"http://www.visual-rules.com/vrpath/BPRequest/MainRequest/\" xmlns:ns1=\"http://www.visual-rules.com/vrpath/BPRequest/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"> <request> <docId>6</docId> <ProductCategory>Share - Bearer</ProductCategory> <Client>Johm Smith</Client> <Domicile>Switzerland</Domicile> <TradePlace>XETRA, Deutschland</TradePlace> </request> </input>";
+        String JMSrequest="";
+        JMS requestExample = new JMS();
+        System.out.print("\n");
+        System.out.println("Starting Actico JMS requestExample now...\n");
+        try {
+            requestExample.establishConnection();
+            requestExample.produceMessage(XML);
+            JMSrequest=requestExample.consumeMessage();
+            requestExample.closeConnection();
+        } catch (Exception e) {
+            System.out.println("Caught an exception during the requestExample: " + e.getMessage());
+        }
+        System.out.println("\nFinished running the Actico JMS requestExample.");
+        System.out.print("\n");
 
-        Request request = new Request();
-        Input input = new Input();
+        HttpURLConnection con = ServerManager.launchServer();
+        XMLFeature.sendXMLRequest(con, JMSrequest);
+        StringBuilder response = XMLFeature.readXMLResponse(con);
+        System.out.println("\n - - - - - -  RECEIVE XML FROM ACTICO EXE SERVER - - - - \n"+response);
 
-        request.setCode("VR32");
-        request.setMobile_priv("00336758697");
-        request.setName("Durand");
-        request.setTel_priv("00297616881");
-        request.setObj_id("100");
 
-        input.setRequest(request);
-
-        System.out.println(getResponse(input).toString());
+        // ------- CALL JMS WITH RESPONSE FROM ACTICO SERVER -----------
+        JMS responseExample = new JMS();
+        System.out.print("\n");
+        System.out.println("Starting Actico JMS responseExample now...\n");
+        try {
+            responseExample.establishConnection();
+            responseExample.produceMessage(response.toString());
+            responseExample.closeConnection();
+        } catch (Exception e) {
+            System.out.println("Caught an exception during the responseExample: " + e.getMessage());
+        }
+        System.out.println("\nFinished running the Actico JMS responseExample.");
+        System.out.print("\n");
     }
 
     /**

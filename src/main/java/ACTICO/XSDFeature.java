@@ -1,4 +1,4 @@
-package XSDParser;
+package ACTICO;
 
 import Model.Input;
 import org.apache.xerces.xs.XSModel;
