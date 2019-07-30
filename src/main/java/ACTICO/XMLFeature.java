@@ -128,10 +128,10 @@ public class XMLFeature {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element elem = (Element) nodeList.item(i);
             Node nodeDocId = elem.getElementsByTagName("ns1:docId").item(0).getFirstChild();
-            Node nodeProductCategory = elem.getElementsByTagName("ns1:ProductCategory").item(0).getFirstChild();
-            Node nodeClient = elem.getElementsByTagName("ns1:Client").item(0).getFirstChild();
-            Node nodeDomicile = elem.getElementsByTagName("ns1:Domicile").item(0).getFirstChild();
-            Node nodeTradePlace = elem.getElementsByTagName("ns1:TradePlace").item(0).getFirstChild();
+            Node nodeProductCategory = elem.getElementsByTagName("ns1:productCategory").item(0).getFirstChild();
+            Node nodeClient = elem.getElementsByTagName("ns1:client").item(0).getFirstChild();
+            Node nodeDomicile = elem.getElementsByTagName("ns1:domicile").item(0).getFirstChild();
+            Node nodeTradePlace = elem.getElementsByTagName("ns1:tradePlace").item(0).getFirstChild();
 
             nodeDocId.setNodeValue(input.getRequest().getDocId());
             nodeProductCategory.setNodeValue(input.getRequest().getProductCategory());

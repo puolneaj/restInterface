@@ -1,10 +1,13 @@
-package JMS;
+package Middleware;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
-
 import javax.jms.*;
 
-public class SimpleJMS {
+/**
+ * handle the message between ActiveMQ and Actico servers.
+ *
+ */
+public class JMS {
 
     private final String connectionUri = "tcp://localhost:61616";
     private ActiveMQConnectionFactory connectionFactory;
@@ -12,7 +15,13 @@ public class SimpleJMS {
     private Session session;
     private Destination destination;
 
-    public void before() throws Exception {
+    /**
+     * Establish connection to ActiveMQ port (i.e. port 61616).
+     *
+     * Create and start connection to the URI tcp://localhost:61616. Create a queue Trade.Work.
+     * @throws Exception when any generic issue comes up.
+     */
+    public void establishConnection() throws Exception {
         connectionFactory = new ActiveMQConnectionFactory(connectionUri);
         connection = connectionFactory.createConnection();
         connection.start();
@@ -20,13 +29,25 @@ public class SimpleJMS {
         destination = session.createQueue("TRADEQ.Work");
     }
 
-    public void after() throws Exception {
+    /**
+     * Close connection to ActiveMQ port (i.e. port 61616).
+     * @throws Exception when any generic issue comes up.
+     */
+    public void closeConnection() throws Exception {
         if (connection != null) {
             connection.close();
         }
     }
 
-    public void run() throws Exception {
+    /**
+     * Produce and consume a XML message.
+     *
+     * Create a producer attached to the queue TRADEQ.Work, then a message with text in the body and send it. Close the procucer.<br>
+     * Create a consumer and get the message from the queue TRADEQ.Work. Print the message and close the consumer.
+     *
+     * @throws Exception when any generic issue comes up.
+     */
+    public void produceAndConsumeMessage() throws Exception {
 
         MessageProducer producer = session.createProducer(destination);
         try {
@@ -47,7 +68,14 @@ public class SimpleJMS {
         }
     }
 
-    public void SrunProducer(String XML) throws Exception {
+    /**
+     * Produce message.
+     *
+     * Produce message and insert text in its body. Send the message. Close the producer.
+     * @param XML string following XML standard
+     * @throws Exception when any generic issue comes up.
+     */
+    public void produceMessage(String XML) throws Exception {
         TextMessage message;
         MessageProducer producer = session.createProducer(destination);
         try {
@@ -59,7 +87,14 @@ public class SimpleJMS {
         }
     }
 
-    public String SrunConsumer() throws Exception{
+    /**
+     * Consume message.
+     *
+     * Create a consumer for a specific queue. Retrieve the message body and return it. Also print it for debugging purpose.
+     * @return body of the message in text format.
+     * @throws Exception
+     */
+    public String consumeMessage() throws Exception{
         String text="";
         MessageConsumer consumer = session.createConsumer(destination);
         try {
@@ -72,18 +107,23 @@ public class SimpleJMS {
         return text;
     }
 
+    /**
+     * Generic process handling a message.
+     * @deprecated
+     * @param args is obsolete
+     */
     public static void main(String[] args) {
-        SimpleJMS example = new SimpleJMS();
-        System.out.print("\n\n\n");
-        System.out.println("Starting Actico SimpleJMS example now...\n");
+        JMS example = new JMS();
+        System.out.print("\n");
+        System.out.println("Starting Actico JMS example now...\n");
         try {
-            example.before();
-            example.run();
-            example.after();
+            example.establishConnection();
+            example.produceAndConsumeMessage();
+            example.closeConnection();
         } catch (Exception e) {
             System.out.println("Caught an exception during the example: " + e.getMessage());
         }
-        System.out.println("\nFinished running the Actico SimpleJMS example.");
-        System.out.print("\n\n\n");
+        System.out.println("\nFinished running the Actico JMS example.");
+        System.out.print("\n");
     }
 }
