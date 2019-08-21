@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Moreover, Actico server provides endpoints which are specific to the executions of
  * the RuleServices {@link RequestResource}.<br>
  * Those endpoints can be accessed on the Help Section of Actico Server WebPage.
+ * @deprecated
  */
 @SpringBootApplication
 public class RestinterfaceApplication {
@@ -22,5 +23,4 @@ public class RestinterfaceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RestinterfaceApplication.class, args);
 	}
-
 }

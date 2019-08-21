@@ -17,6 +17,7 @@ import java.util.List;
  * <p>Architecture of the endpoints is displayed in this class.</p>
  *
  * <b>@RestController Annotation</b> corresponds to @Controller and @ResponseBody annotations altogether
+ * @deprecated
  */
 @RestController
 public class RequestResource {

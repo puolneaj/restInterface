@@ -3,6 +3,7 @@ package Model;
 /**
  * Model of the Request sent to Actico Execution Server
  * <p>{@link Request} Model is embedded inside.</p>
+ * @deprecated
  */
 public class Input {
     private Request request;

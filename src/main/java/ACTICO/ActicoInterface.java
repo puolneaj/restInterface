@@ -1,10 +1,13 @@
 package ACTICO;
-import Middleware.JMS;
+import Model.JMS;
 
 import javax.xml.transform.TransformerConfigurationException;
 import Model.*;
 
 import com.actico.restInterface.RequestDaoService;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.xerces.xs.XSModel;
 import org.w3c.dom.Document;
 
@@ -19,48 +22,53 @@ import java.net.HttpURLConnection;
 public class ActicoInterface {
     /**
      * <b>Main Method</b><br>
-     * Trigger Actico Server and {@link #getResponse(Input) getResponse} from an hardcoded request.
-     *
-     * Print the output generated
+     * Trigger Actico Server (1) with a message coming from Avaloq AMI or (2) with an hardcoded request.
+     * Print the output generated.
      * @param args argument not required
-     * @throws TransformerConfigurationException
      */
-    public static void main(String args[]) throws TransformerConfigurationException {
-        String XML="<input xmlns=\"http://www.visual-rules.com/vrpath/BPRequest/MainRequest/\" xmlns:ns1=\"http://www.visual-rules.com/vrpath/BPRequest/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"> <request> <docId>6</docId> <ProductCategory>Share - Bearer</ProductCategory> <Client>Johm Smith</Client> <Domicile>Switzerland</Domicile> <TradePlace>XETRA, Deutschland</TradePlace> </request> </input>";
+    public static void main(String args[]) {
+        final Logger logger;
+        logger = LogManager.getLogger(ActicoInterface.class);
+        /*Hardcoded request*/
+        String XML="<input xmlns=\"http://www.visual-rules.com/vrpath/BPRequest/MainRequest/\" xmlns:ns1=\"http://www.visual-rules.com/vrpath/BPRequest/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+                "<request>\n" +
+                "<docId>?</docId>\n" +
+                "<client>?</client>\n" +
+                "<tradePlace>?</tradePlace>\n" +
+                "<productCategory>?</productCategory>\n" +
+                "<domicile>?</domicile>\n" +
+                "</request>\n" +
+                "</input>";
         String JMSrequest="";
         JMS requestExample = new JMS();
-        System.out.print("\n");
-        System.out.println("Starting Actico JMS requestExample now...\n");
+        /*Consuming Message on ActiveMQ*/
+        logger.info("Starting Actico JMS requestExample now...");
         try {
-            requestExample.establishConnection();
-            requestExample.produceMessage(XML);
+            requestExample.establishInConnection();
+//            requestExample.produceMessage(XML);
             JMSrequest=requestExample.consumeMessage();
-            requestExample.closeConnection();
+//            requestExample.closeConnection();
         } catch (Exception e) {
-            System.out.println("Caught an exception during the requestExample: " + e.getMessage());
+            logger.error("Caught an exception with requestExample: " + e.getMessage());
         }
-        System.out.println("\nFinished running the Actico JMS requestExample.");
-        System.out.print("\n");
+        logger.info("Finished running the Actico JMS requestExample.");
 
+        /*Trigger Actico Execution Server with JMS request*/
         HttpURLConnection con = ServerManager.launchServer();
         XMLFeature.sendXMLRequest(con, JMSrequest);
         StringBuilder response = XMLFeature.readXMLResponse(con);
-        System.out.println("\n - - - - - -  RECEIVE XML FROM ACTICO EXE SERVER - - - - \n"+response);
 
-
-        // ------- CALL JMS WITH RESPONSE FROM ACTICO SERVER -----------
+        /*Produce Message on ActiveMQ*/
         JMS responseExample = new JMS();
-        System.out.print("\n");
-        System.out.println("Starting Actico JMS responseExample now...\n");
+        logger.info("Starting Actico JMS responseExample now...");
         try {
-            responseExample.establishConnection();
+            responseExample.establishOutConnection();
             responseExample.produceMessage(response.toString());
             responseExample.closeConnection();
         } catch (Exception e) {
-            System.out.println("Caught an exception during the responseExample: " + e.getMessage());
+            logger.error("Caught an exception with responseExample: " + e.getMessage());
         }
-        System.out.println("\nFinished running the Actico JMS responseExample.");
-        System.out.print("\n");
+        logger.info("Finished running the Actico JMS responseExample.");
     }
 
     /**
@@ -83,6 +91,7 @@ public class ActicoInterface {
      * @param input the model on which the XML file request is based upon
      * @return the output model on which the XML file response is based upon
      * @throws TransformerConfigurationException
+     * @deprecated as RestInterface.class is deprecated.
      */
     //TODO check if there is no better way to chose the parameters of the method -> remove input
     public static Output getResponse(Input input) throws TransformerConfigurationException {

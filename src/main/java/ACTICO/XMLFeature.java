@@ -4,6 +4,8 @@ import Model.Input;
 import Model.Output;
 import jlibs.xml.sax.XMLDocument;
 import jlibs.xml.xsd.XSInstance;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.xerces.xs.XSModel;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -26,6 +28,7 @@ import java.net.HttpURLConnection;
  * Repository of methods related to <b>XML files</b>.
  */
 public class XMLFeature {
+    static final Logger logger= LogManager.getLogger(XMLFeature.class);
 
     /**
      * <b>Generic Method</b><br>
@@ -39,7 +42,7 @@ public class XMLFeature {
      * @return string value of what the contains the Http connection.
      */
     public static StringBuilder readXMLResponse(HttpURLConnection con) {
-        //System.out.println("\n------READ THE WHOLE DOCUMENT USING BUFFEREDREADER-------\n");
+        logger.debug("Read document using BufferedReader with the HttpConnection "+con);
         String inputLine = "";
         StringBuilder response = new StringBuilder();
         try {
@@ -72,8 +75,10 @@ public class XMLFeature {
      *
      * @param document
      * @return String with the content of an XML file
+     * @deprecated
      */
     public static String getXMLDocument(Document document) {
+        logger.debug("Get XML document");
         DOMImplementationLS domImplementationLS = (DOMImplementationLS) document
                 .getImplementation();
         LSSerializer lsSerializer = domImplementationLS.createLSSerializer();
@@ -90,8 +95,10 @@ public class XMLFeature {
      *
      * @param stringWriter string with the content of the XML
      * @return document using document builder
+     * @deprecated
      */
     public static Document buildDocumentFromString(StringWriter stringWriter) {
+        logger.debug("Build document from string "+stringWriter);
         Document document = null;
         try {
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().
@@ -118,6 +125,7 @@ public class XMLFeature {
      * @param stringWriter XML file of type String
      * @param input        object model used to set the attributes value of XML file
      * @return             document with XML attributes values corresponding to the request
+     * @deprecated
      */
     public static Document modifyXMLRequest(StringWriter stringWriter, Input input) {
 
@@ -160,6 +168,7 @@ public class XMLFeature {
      * @param stringBuilder string corresponding to the XML file.
      * @param nodeName
      * @return output object with the XML attributes values in the object fields.
+     * @deprecated
      */
     public static Output castXMLintoOutput(StringBuilder stringBuilder, String nodeName) {
 
@@ -195,6 +204,7 @@ public class XMLFeature {
      *
      * @param stringBuilder string with the content of the XML.
      * @return document using DocumentBuilder from DocumentBuilderFactory.
+     * @deprecated
      */
     public static Document buildDocumentFromBuffer(StringBuilder stringBuilder) {
         Document document = null;
@@ -216,11 +226,6 @@ public class XMLFeature {
      *     <li>Write a string to the stream</li>
      *     <li>Get Response Code - here 201 if HTTP POST is successful</li>
      * </ul>
-     * access the response code
-     *
-     * <p>Method {@link #getXMLDocument(Document) getXMLDocument} precedes this method.<br>
-     * Method {@link #readXMLResponse(HttpURLConnection)} readXMLResponse} follows this method.</p>
-     *
      * <p>Note: The HTTP Connection is already open.</p>
      *
      * @param con        Http Connection
@@ -237,13 +242,13 @@ public class XMLFeature {
             outStreamWriter.flush();
             outStreamWriter.close();
             outStream.close();
-            System.out.println("\n - - - - - - SEND XML- - - - - \n");
+            logger.debug("Send XML");
             responseCode = con.getResponseCode();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //get the response code of the HTTP protocol
-        System.out.println("Response Code : " + responseCode);
+        /*get the response code of the HTTP protocole*/
+        logger.debug("Response Code : " + responseCode);
     }
 
     /**
@@ -272,6 +277,7 @@ public class XMLFeature {
      * @param nodeName        name of the node from which the information is taken in the method.
      * @return return a string which represents the XML Document
      * @throws TransformerConfigurationException if a fatal error of configuration appears
+     * @deprecated
      */
     public static StringWriter buildXMLInstance(XSModel xsModel, String targetNamespace, String nodeName) throws TransformerConfigurationException {
         // Define defaults for the XML generation

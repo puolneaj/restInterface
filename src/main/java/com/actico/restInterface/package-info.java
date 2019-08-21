@@ -16,5 +16,7 @@
  *</ul>
  *
  * <p>Note: REST != HTTP</p>
+ *
+ * @deprecated
  */
 package com.actico.restInterface;

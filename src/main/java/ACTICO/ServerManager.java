@@ -2,17 +2,21 @@ package ACTICO;
 
 import Model.ExecutionServer;
 import Model.URI;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+
 /**
  * Set server settings for the class {@link ActicoInterface}<br>
  * Select the appropriate ruleService on Actico Execution Server.
  */
 public class ServerManager {
+    final static Logger logger= LogManager.getLogger(ServerManager.class);
     /**
      * Launch the connection with Actico Server
      *
@@ -51,12 +55,12 @@ public class ServerManager {
             // Basic authentication
             BASE64Encoder enc = new sun.misc.BASE64Encoder();
             String encodedAuthorization = enc.encode(execution.getUserpassword().getBytes());
-            con.setRequestProperty("Authorization", "Basic " +
-                    encodedAuthorization);
+            con.setRequestProperty("Authorization", "Basic " + encodedAuthorization);
             //set the body of the request
             con.setRequestProperty("Content-Type", "application/xml; charset=utf-8");
 //            con.setRequestMethod("accept:application/xml");
             con.setRequestProperty("Expect", "100-continue");
+            logger.debug("Launch the connection with Actico Server");
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -3,6 +3,7 @@ package Model;
 /**
  * Model of the response from Actico Server.<br>
  * Match Actico model outputs with the fields <b>key</b> and <b>status</b>
+ * @deprecated
  */
 public class Output {
 

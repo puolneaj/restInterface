@@ -24,6 +24,10 @@ dependencies {
 	compile group: 'javax.jms', name: 'javax.jms-api', version: '2.0.1'
 	// https://mvnrepository.com/artifact/org.apache.activemq/activemq-core
 	compile group: 'org.apache.activemq', name: 'activemq-core', version: '5.7.0'
+    // https://mvnrepository.com/artifact/log4j/log4j
+	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.12.0'
 
 
 

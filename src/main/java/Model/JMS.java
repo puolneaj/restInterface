@@ -1,16 +1,18 @@
-package Middleware;
+package Model;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import javax.jms.*;
 
 /**
  * Handle the message between ActiveMQ and Actico servers.
- *
+ * Create a connection on the Remote Desk (IP : 172.26.161.170) with a session and a destination as attributes.
  */
 public class JMS {
-
-//    private final String connectionUri = "tcp://localhost:61616";
-    private final String connectionUri = "tcp://172.26.161.170:61616";
+    final Logger logger= LogManager.getLogger(JMS.class);
+    private final String connectionUri = "tcp://localhost:61616";
+//    private final String connectionUri = "tcp://172.26.161.170:61616";
     private ActiveMQConnectionFactory connectionFactory;
     private Connection connection;
     private Session session;
@@ -19,16 +21,34 @@ public class JMS {
     /**
      * Establish connection to ActiveMQ port (i.e. port 61616).
      *
-     * Create and start connection to the URI tcp://localhost:61616. Create a queue <i>Trade.Work</i>.
+     * Create and start connection to the URI tcp://localhost:61616. Create a queue <i>avq_out</i>.
      * @throws Exception when any generic issue comes up.
      */
-    public void establishConnection() throws Exception {
+    public void establishInConnection() throws Exception {
+
         connectionFactory = new ActiveMQConnectionFactory(connectionUri);
         connection = connectionFactory.createConnection();
         connection.start();
         session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-//        destination = session.createQueue("TRADEQ.Work");
         destination = session.createQueue("avq_out");
+
+        logger.info("Queue "+destination+" is established in ActiveMQ.");
+    }
+
+    /**
+     * Establish connection to ActiveMQ port (i.e. port 61616).
+     *
+     * Create and start connection to the URI tcp://localhost:61616. Create a queue <i>avq_in</i>.
+     * @throws Exception when any generic issue comes up.
+     */
+    public void establishOutConnection() throws Exception {
+        connectionFactory = new ActiveMQConnectionFactory(connectionUri);
+        connection = connectionFactory.createConnection();
+        connection.start();
+        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+        destination = session.createQueue("avq_in");
+
+        logger.info("Queue "+destination+" is established in ActiveMQ.");
 
     }
 
@@ -40,14 +60,15 @@ public class JMS {
         if (connection != null) {
             connection.close();
         }
+        logger.info("Connection "+connection+" is closed.");
     }
 
     /**
      * Produce and consume a XML message.
      *
-     * Create a producer attached to the queue <i>TRADEQ.Work</i>, then a message with text in the body and send it. Close the procucer.<br>
-     * Create a consumer and get the message from the queue <i>TRADEQ.Work</i>. Print the message and close the consumer.
-     *
+     * Create a producer attached to the queue, then a message with text in the body and send it. Close the procucer.<br>
+     * Create a consumer and get the message from the queue. Print the message and close the consumer.
+     * @deprecated
      * @throws Exception when any generic issue comes up.
      */
     public void produceAndConsumeMessage() throws Exception {
@@ -55,12 +76,11 @@ public class JMS {
         MessageProducer producer = session.createProducer(destination);
         try {
             TextMessage message = session.createTextMessage();
-            message.setText("<input xmlns=\"http://www.visual-rules.com/vrpath/BPRequest/MainRequest/\" xmlns:ns1=\"http://www.visual-rules.com/vrpath/BPRequest/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"> <request> <docId>6</docId> <ProductCategory>Share - Bearer</ProductCategory> <Client>Johm Smith</Client> <Domicile>Switzerland</Domicile> <TradePlace>XETRA, Deutschland</TradePlace> </request> </input>");
+            message.setText("<input xmlns=\"http://www.visual-rules.com/vrpath/BPRequest/MainRequest/\" xmlns:ns1=\"http://www.visual-rules.com/vrpath/BPRequest/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"> <request> <docId>7875827</docId> <ProductCategory>Share - Bearer</ProductCategory> <Client>Johm Smith</Client> <Domicile>Switzerland</Domicile> <TradePlace>XETRA, Deutschland</TradePlace> </request> </input>");
             producer.send(message);
         } finally {
             producer.close();
         }
-
         MessageConsumer consumer = session.createConsumer(destination);
         try {
             TextMessage message = (TextMessage) consumer.receive();
@@ -85,8 +105,10 @@ public class JMS {
             message = session.createTextMessage();
             message.setText(XML);
             producer.send(message);
+            logger.debug("Producer "+producer+" sends the message.");
         } finally {
             producer.close();
+            logger.debug("Producer "+producer+" is closed.");
         }
     }
 
@@ -103,7 +125,7 @@ public class JMS {
         try {
             TextMessage message = (TextMessage) consumer.receive();
             text=message.getText();
-            System.out.println(text);
+            logger.debug("Consumer "+consumer+" sends the message.");
         } finally {
             consumer.close();
         }
@@ -120,7 +142,7 @@ public class JMS {
         System.out.print("\n");
         System.out.println("Starting Actico JMS example now...\n");
         try {
-            example.establishConnection();
+            example.establishInConnection();
             example.produceAndConsumeMessage();
             example.closeConnection();
         } catch (Exception e) {

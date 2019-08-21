@@ -4,6 +4,7 @@ import ACTICO.ActicoInterface;
 
 /**
  * Structure of the request embedded in {@link Input}
+ * @deprecated
  */
 public class Request {
 

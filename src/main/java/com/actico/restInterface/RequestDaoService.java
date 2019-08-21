@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Gather the methods to manipulate the requests and trigger Actico Server.
+ * @deprecated
  */
 @Component
 public class RequestDaoService {

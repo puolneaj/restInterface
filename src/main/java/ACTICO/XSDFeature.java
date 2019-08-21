@@ -11,6 +11,7 @@ import java.io.File;
 
 /**
  * Gather the functionalities of XSD file
+ * @deprecated
  */
 public class XSDFeature {
     /**
@@ -29,6 +30,7 @@ public class XSDFeature {
      *
      * @param inputName location of the XSD file.
      * @return XSD of type Document.
+     * @deprecated
      */
     public static Document loadXSDDocument(String inputName) {
         final String filename = inputName;              /* location of the XSD file */
@@ -68,6 +70,7 @@ public class XSDFeature {
      *
      * @param doc XSD of type document - provided by Actico Modeler
      * @return target name of type String - of type 'http://www.visual-rules.com/vrpath/RuleServiceName/RuleName/'
+     * @deprecated
      */
     public static String getTargetnamespace(Document doc){
         // Find the docs root element and use it to find the targetNamespace
