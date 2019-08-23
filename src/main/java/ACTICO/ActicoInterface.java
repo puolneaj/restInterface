@@ -15,6 +15,8 @@ import jlibs.xml.xsd.XSParser;
 
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <b> Backbone of the project.</b>
@@ -57,19 +59,30 @@ public class ActicoInterface {
         HttpURLConnection con = ServerManager.launchServer();
         XMLFeature.sendXMLRequest(con, JMSrequest);
         StringBuilder response = XMLFeature.readXMLResponse(con);
+        logger.debug("Response from ACTICO : "+ response);
+
+        String inadequateOutputNode="<output .*\">";
+        String adequateOutputNode="<output>";
+        Pattern pattern=Pattern.compile(inadequateOutputNode);
+        Matcher matcher=pattern.matcher(response.toString());
+        String responseToString=matcher.replaceAll(adequateOutputNode);
+        logger.debug("Proceed to Regex on the response XML");
+        logger.info("response with new regex pattern: " +responseToString);
 
         /*Produce Message on ActiveMQ*/
         JMS responseExample = new JMS();
         logger.info("Starting Actico JMS responseExample now...");
         try {
             responseExample.establishOutConnection();
-            responseExample.produceMessage(response.toString());
+            responseExample.produceMessage(responseToString);
+//            responseExample.produceMessage(response.toString());
             responseExample.closeConnection();
         } catch (Exception e) {
             logger.error("Caught an exception with responseExample: " + e.getMessage());
         }
         logger.info("Finished running the Actico JMS responseExample.");
     }
+
 
     /**
      * Trigger Actico server - Backbone of the project.
